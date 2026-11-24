@@ -12,6 +12,7 @@ own machine and open no network connection.
 | Skill | What it does |
 | --- | --- |
 | [sepa-returns-check](skills/sepa-returns-check/) | Reads a month's SEPA Direct Debit return file and tells you which debits to collect again, on what date, which need a fix or a talk with the customer first, and which to stop. Also explains any single reason code. |
+| [chargeback-ratio-check](skills/chargeback-ratio-check/) | Works out your chargeback ratio from two numbers, the way Mastercard counts it, and sets it beside the published Visa, Mastercard and MATCH thresholds, each a ratio and a minimum count, with the source and date behind each. |
 
 More will follow.
 
@@ -52,6 +53,35 @@ The code names and meanings come from the European Payments Council's guidance o
 8.1, 30 September 2026). Whether to collect again, how long to wait and how many times are Waverunner's defaults: the
 EPC sets no retry rule. The skill keeps the two apart in every answer.
 
+## Chargeback ratio check
+
+Card networks watch your chargebacks every month, and every line they publish has two parts: a ratio and a minimum
+count. Mastercard divides this month's chargebacks by last month's transactions; Visa counts fraud reports as well as
+disputes. A ratio on its own says little until you know which test it is measured against.
+
+Give the skill two numbers and ask:
+
+> 45 chargebacks this month, 2,500 transactions last month. Where does that put me?
+
+You get:
+
+- your ratio in percent and in basis points, counted the way Mastercard counts it
+- each published threshold (Mastercard's ECM and HECM levels, Visa's merchant test and acquirer levels, MATCH code
+  04), with its ratio and its minimum, and where your numbers sit against each part
+- the source and read date behind every figure, and which ones rest on a secondary source
+- what to ask your payment provider, who confirms which test applies to you
+
+It does not say whether your account is safe or what your provider will do. It also answers plain questions, such as
+which month to divide by or whether a dispute you won still counts, from the same data.
+
+### Facts and sources
+
+Every threshold, date and region comes from Waverunner's guide
+[What chargeback ratio gets my account shut down?](https://waverunner.ai/blog/chargeback-ratio/), updated
+6 November 2026, with the source that guide names: Visa's VAMP fact sheet, Mastercard's Security Rules and Procedures,
+and, for Mastercard's ECM and HECM levels, TabaPay's summary, a processor's reading rather than Mastercard's own rule
+text. The data file says which is which.
+
 ## Install
 
 **Claude Code**
@@ -62,11 +92,13 @@ EPC sets no retry rule. The skill keeps the two apart in every answer.
 ```
 
 **Any other assistant that reads skills:** copy `skills/sepa-returns-check/` into its skills folder.
+Copy `skills/chargeback-ratio-check/` the same way.
 
 **No assistant at all:**
 
 ```bash
 python skills/sepa-returns-check/scripts/returns_check.py skills/sepa-returns-check/examples/returns-october.xml
+python skills/chargeback-ratio-check/scripts/chargeback_check.py --chargebacks 45 --transactions 2500
 ```
 
 It needs Python 3.9 or newer and nothing else.
@@ -84,6 +116,8 @@ Debit included.
 
 The same decoder runs in the browser at
 [waverunner.ai/tools/sepa-return-codes](https://waverunner.ai/tools/sepa-return-codes/).
+The chargeback ratio calculator runs in the browser in the guide at
+[waverunner.ai/blog/chargeback-ratio](https://waverunner.ai/blog/chargeback-ratio/).
 
 ## Licence
 

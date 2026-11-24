@@ -1,0 +1,370 @@
+{
+  "name": "Published chargeback and dispute monitoring thresholds",
+  "publisher": "Waverunner",
+  "guide": {
+    "title": "What chargeback ratio gets my account shut down?",
+    "url": "https://waverunner.ai/blog/chargeback-ratio/",
+    "calculatorUrl": "https://waverunner.ai/blog/chargeback-ratio/#chargeback-ratio-calculator-what-is-my-ratio",
+    "updated": "2026-11-06"
+  },
+  "copied": "2026-11-24",
+  "note": "Every threshold, minimum, date, region and rule here is restated from the guide, with the source the guide names and the date the guide says that source was checked. Nothing is added from elsewhere. Where the guide does not state something, the field says so.",
+  "basisMeaning": {
+    "scheme": "The card network's own document.",
+    "secondary": "Another company's summary of a card network's rule, not the network's own rule text.",
+    "provider": "A payment provider's own rule or price, which applies to that provider's merchants only."
+  },
+  "sources": {
+    "visa-vamp": {
+      "publisher": "Visa",
+      "title": "Visa Acquirer Monitoring Program (VAMP) fact sheet 2025",
+      "url": "https://corporate.visa.com/content/dam/VCOM/corporate/visa-perspectives/security-and-trust/documents/visa-acquirer-monitoring-program-fact-sheet-2025.pdf",
+      "checked": "2026-11-04"
+    },
+    "mastercard-spme": {
+      "publisher": "Mastercard",
+      "title": "Security Rules and Procedures, Merchant Edition",
+      "url": "https://www.mastercard.com/content/dam/mccom/shared/business/support/rules-pdfs/SPME-Manual.pdf",
+      "checked": "2026-10-30"
+    },
+    "tabapay": {
+      "publisher": "TabaPay",
+      "title": "Network Monitoring Programs",
+      "url": "https://developers.tabapay.com/docs/network-monitoring-programs",
+      "checked": "2026-11-04"
+    },
+    "verifi": {
+      "publisher": "Verifi",
+      "title": "How is the required Mastercard chargeback threshold ratio calculated?",
+      "url": "https://verifi.review.visa.com/chargebacks-disputes-faq/how-is-the-required-mastercard-chargeback-threshold-ratio-calculated.html",
+      "checked": "2026-10-30"
+    },
+    "shopify-practices": {
+      "publisher": "Shopify",
+      "title": "Acceptable business practices and risk evaluation for Shopify Payments",
+      "url": "https://help.shopify.com/en/manual/payments/shopify-payments/onboarding/acceptable-business-practices",
+      "checked": "2026-11-04"
+    },
+    "shopify-monitoring": {
+      "publisher": "Shopify",
+      "title": "Fraud and dispute monitoring programs",
+      "url": "https://help.shopify.com/en/manual/payments/chargebacks/monitoring-programs",
+      "checked": "2026-11-04"
+    },
+    "stripe-monitoring": {
+      "publisher": "Stripe",
+      "title": "Monitoring program FAQ",
+      "url": "https://support.stripe.com/questions/monitoring-program-faq",
+      "checked": "2026-11-04"
+    },
+    "checkout-vamp": {
+      "publisher": "Checkout.com",
+      "title": "Update to the Visa Acquirer Monitoring Program (VAMP)",
+      "url": "https://support.checkout.com/hc/en-us/articles/26990138066450-Update-to-the-Visa-Acquirer-Monitoring-Program-VAMP",
+      "checked": "2026-11-04"
+    },
+    "braintree-2026": {
+      "publisher": "PayPal Braintree",
+      "title": "Network Updates 2026",
+      "url": "https://developer.paypal.com/braintree/articles/risk-and-security/compliance/network-updates/2026",
+      "checked": "2026-11-04"
+    }
+  },
+  "programmes": [
+    {
+      "id": "mastercard-ecm",
+      "name": "Mastercard Excessive Chargeback Merchant (ECM) level",
+      "network": "Mastercard",
+      "kind": "card network monitoring, merchant level",
+      "basis": "secondary",
+      "appliesTo": "one merchant ID",
+      "region": "not stated in the guide",
+      "effectiveFrom": "not stated in the guide",
+      "period": "monthly",
+      "howItCounts": "This month's Mastercard chargebacks over the previous month's Mastercard transactions: a July ratio uses June's transactions. It counts transactions, not sales revenue.",
+      "howItCountsSource": "verifi",
+      "ratio": { "bps": 150, "rule": "at least", "text": "150 bps (1.5%) or more" },
+      "minimums": [{ "value": 100, "rule": "at least", "unit": "chargebacks in the month", "text": "at least 100 chargebacks in the month" }],
+      "threshold": "At least 150 bps AND at least 100 chargebacks in the month",
+      "computeFrom": "this-month-over-last-month",
+      "publishedFollowUp": "A remediation plan; assessments from month 2.",
+      "leaving": "Three consecutive months below the thresholds, according to TabaPay; only then does Mastercard remove a merchant from the programme. The provider still decides for itself about restrictions and about reopening a closed account.",
+      "ask": "Ask your provider which data month, merchant ID and counts its figure used.",
+      "source": "tabapay",
+      "caveat": "The guide takes the ECM figures from TabaPay, a payment processor's summary, not from Mastercard's own rule text. The way Mastercard counts comes from Verifi, Visa's dispute service.",
+      "guideSection": "Which chargeback ratio thresholds apply to my account?"
+    },
+    {
+      "id": "mastercard-hecm",
+      "name": "Mastercard High Excessive Chargeback Merchant (HECM) level",
+      "network": "Mastercard",
+      "kind": "card network monitoring, merchant level",
+      "basis": "secondary",
+      "appliesTo": "one merchant ID",
+      "region": "not stated in the guide",
+      "effectiveFrom": "not stated in the guide",
+      "period": "monthly",
+      "howItCounts": "This month's Mastercard chargebacks over the previous month's Mastercard transactions: a July ratio uses June's transactions. It counts transactions, not sales revenue.",
+      "howItCountsSource": "verifi",
+      "ratio": { "bps": 300, "rule": "at least", "text": "300 bps (3%) or more" },
+      "minimums": [{ "value": 300, "rule": "at least", "unit": "chargebacks in the month", "text": "at least 300 chargebacks in the month" }],
+      "threshold": "At least 300 bps AND at least 300 chargebacks in the month",
+      "computeFrom": "this-month-over-last-month",
+      "publishedFollowUp": "Larger assessments than ECM from month 3.",
+      "leaving": "Three consecutive months below the thresholds, according to TabaPay; only then does Mastercard remove a merchant from the programme. The provider still decides for itself about restrictions and about reopening a closed account.",
+      "ask": "Ask your provider which data month, merchant ID and counts its figure used.",
+      "source": "tabapay",
+      "caveat": "The guide takes the HECM figures from TabaPay, a payment processor's summary, not from Mastercard's own rule text. The way Mastercard counts comes from Verifi, Visa's dispute service.",
+      "guideSection": "Which chargeback ratio thresholds apply to my account?"
+    },
+    {
+      "id": "visa-vamp-merchant",
+      "name": "Visa Acquirer Monitoring Program (VAMP), merchant test",
+      "network": "Visa",
+      "kind": "card network monitoring, merchant level",
+      "basis": "scheme",
+      "appliesTo": "one merchant, while its acquirer is below both Visa acquirer levels",
+      "region": "Asia Pacific, Canada, the EU and the US",
+      "effectiveFrom": "2026-04-01",
+      "period": "monthly",
+      "howItCounts": "Card-not-present fraud reports and disputes, divided by settled transactions. The guide does not say which month's settled transactions are the divisor.",
+      "howItCountsSource": "visa-vamp",
+      "ratio": { "bps": 150, "rule": "at least", "text": "150 bps (1.5%) or more" },
+      "minimums": [{ "value": 1500, "rule": "at least", "unit": "fraud reports and disputes a month", "text": "at least 1,500 fraud reports and disputes a month" }],
+      "threshold": "At least 150 bps AND at least 1,500 fraud reports and disputes a month",
+      "computeFrom": null,
+      "notComputed": "Visa's ratio adds card-not-present fraud reports to disputes and divides by settled transactions, so chargebacks over last month's transactions is not Visa's figure.",
+      "publishedFollowUp": "Risk controls and per-count fees.",
+      "ask": "Ask your provider for your VAMP ratio, your acquirer's Visa level, and which test applies to you.",
+      "source": "visa-vamp",
+      "guideSection": "Which chargeback ratio thresholds apply to my account?"
+    },
+    {
+      "id": "visa-vamp-merchant-cemea",
+      "name": "Visa VAMP, merchant test in CEMEA",
+      "network": "Visa",
+      "kind": "card network monitoring, merchant level",
+      "basis": "scheme",
+      "tableOnly": true,
+      "appliesTo": "merchants in Visa's CEMEA region, in place of the 150 bps test",
+      "region": "Central Europe, the Middle East and Africa (CEMEA)",
+      "effectiveFrom": "not stated in the guide",
+      "period": "monthly",
+      "howItCounts": "Not described separately in the guide.",
+      "howItCountsSource": null,
+      "ratio": { "bps": 220, "rule": "at least", "text": "220 bps (2.2%) or more" },
+      "minimums": [
+        { "value": 150, "rule": "at least", "unit": "events a month", "text": "at least 150 events a month" },
+        { "value": 75000, "rule": "at least", "unit": "USD in value", "text": "at least USD 75,000 in value" }
+      ],
+      "threshold": "At least 220 bps AND at least 150 events a month AND at least USD 75,000 in value",
+      "computeFrom": null,
+      "notComputed": "This test needs Visa's own count of events and their value, which two numbers of chargebacks and transactions do not give.",
+      "publishedFollowUp": "Risk controls and per-count fees.",
+      "ask": "Ask your provider for your VAMP ratio, your acquirer's Visa level, and which test applies to you.",
+      "source": "visa-vamp",
+      "caveat": "These figures appear only in the guide's table, which names Visa as a source. The guide's text says CEMEA merchants have a test of their own and gives no figures.",
+      "guideSection": "Which chargeback ratio thresholds apply to my account?"
+    },
+    {
+      "id": "visa-vamp-acquirer-above-standard",
+      "name": "Visa VAMP, acquirer level Above Standard",
+      "network": "Visa",
+      "kind": "card network monitoring, acquirer level",
+      "basis": "scheme",
+      "appliesTo": "an acquirer's whole portfolio of merchants, not one merchant",
+      "region": "Asia Pacific, Canada, the EU and the US; CEMEA with a different minimum",
+      "effectiveFrom": "not stated in the guide",
+      "period": "monthly",
+      "howItCounts": "Fraud and dispute events across the acquirer's whole portfolio.",
+      "howItCountsSource": "visa-vamp",
+      "ratio": { "bps": 50, "rule": "at least", "text": "50 bps (0.5%) or more" },
+      "minimums": [
+        { "value": 1500, "rule": "at least", "unit": "fraud and dispute events a month across the portfolio", "region": "Asia Pacific, Canada, the EU and the US", "text": "at least 1,500 fraud and dispute events a month across the portfolio, in Asia Pacific, Canada, the EU and the US" },
+        { "value": 150, "rule": "at least", "unit": "events a month", "region": "CEMEA", "text": "in CEMEA, at least 150 events a month" },
+        { "value": 75000, "rule": "at least", "unit": "USD in value", "region": "CEMEA", "text": "in CEMEA, events worth at least USD 75,000" }
+      ],
+      "threshold": "At least 50 bps across the acquirer's portfolio AND at least 1,500 fraud and dispute events a month (in CEMEA: 150 events worth at least USD 75,000)",
+      "computeFrom": null,
+      "notComputed": "An acquirer level is measured on the acquirer's whole portfolio, not on one merchant's numbers.",
+      "publishedFollowUp": "Visa's merchant test applies only while your acquirer is below both acquirer levels. A provider can pass a monitoring fee down to you.",
+      "ask": "Ask your provider for your acquirer's Visa level.",
+      "source": "visa-vamp",
+      "guideSection": "Which chargeback ratio thresholds apply to my account?"
+    },
+    {
+      "id": "visa-vamp-acquirer-excessive",
+      "name": "Visa VAMP, acquirer level Excessive",
+      "network": "Visa",
+      "kind": "card network monitoring, acquirer level",
+      "basis": "scheme",
+      "appliesTo": "an acquirer's whole portfolio of merchants, not one merchant",
+      "region": "Asia Pacific, Canada, the EU and the US; CEMEA with a different minimum",
+      "effectiveFrom": "not stated in the guide",
+      "period": "monthly",
+      "howItCounts": "Fraud and dispute events across the acquirer's whole portfolio.",
+      "howItCountsSource": "visa-vamp",
+      "ratio": { "bps": 70, "rule": "at least", "text": "70 bps (0.7%) or more" },
+      "minimums": [
+        { "value": 1500, "rule": "at least", "unit": "fraud and dispute events a month across the portfolio", "region": "Asia Pacific, Canada, the EU and the US", "text": "at least 1,500 fraud and dispute events a month across the portfolio, in Asia Pacific, Canada, the EU and the US" },
+        { "value": 150, "rule": "at least", "unit": "events a month", "region": "CEMEA", "text": "in CEMEA, at least 150 events a month" },
+        { "value": 75000, "rule": "at least", "unit": "USD in value", "region": "CEMEA", "text": "in CEMEA, events worth at least USD 75,000" }
+      ],
+      "threshold": "At least 70 bps across the acquirer's portfolio AND at least 1,500 fraud and dispute events a month (in CEMEA: 150 events worth at least USD 75,000)",
+      "computeFrom": null,
+      "notComputed": "An acquirer level is measured on the acquirer's whole portfolio, not on one merchant's numbers.",
+      "publishedFollowUp": "Visa's merchant test applies only while your acquirer is below both acquirer levels. A provider can pass a monitoring fee down to you.",
+      "ask": "Ask your provider for your acquirer's Visa level.",
+      "source": "visa-vamp",
+      "guideSection": "Which chargeback ratio thresholds apply to my account?"
+    },
+    {
+      "id": "mastercard-match-04",
+      "name": "Mastercard MATCH, reason code 04 (excessive chargebacks)",
+      "network": "Mastercard",
+      "kind": "card network merchant screening list (MATCH)",
+      "basis": "scheme",
+      "appliesTo": "a merchant whose account is being ended, by the merchant or the acquirer",
+      "region": "not stated in the guide",
+      "effectiveFrom": "not stated in the guide",
+      "period": "the previous 3 months",
+      "howItCounts": "The previous 3 months' Mastercard chargebacks against one month's Mastercard sales transactions. The guide does not say which month's sales transactions; the provider can.",
+      "howItCountsSource": "mastercard-spme",
+      "ratio": { "bps": 150, "rule": "over", "text": "over 1.5% (150 bps)" },
+      "minimums": [{ "value": 5000, "rule": "at least", "unit": "USD of chargebacks over the 3 months", "text": "chargebacks totalling at least USD 5,000" }],
+      "threshold": "Over 1.5% AND at least USD 5,000 of chargebacks",
+      "computeFrom": null,
+      "notComputed": "MATCH code 04 counts 3 months of Mastercard chargebacks and their total in US dollars against one month's sales transactions, which one month of chargebacks does not give.",
+      "when": "Only when you or your acquirer decide to end the account. The acquirer must then report you to MATCH if it has reason to believe you qualify, and files within 5 calendar days of its termination decision, your notice or learning you qualify, whichever is first.",
+      "publishedFollowUp": "A listing on MATCH, Mastercard's merchant screening system. Mastercard allows an acquirer to accept a merchant listed on MATCH; each acquirer makes its own onboarding decision, and the old provider's closure decision stands.",
+      "ask": "Ask your provider which month's sales transactions it compared against.",
+      "source": "mastercard-spme",
+      "caveat": "The guide's summary at the top says the 3-month chargebacks exceed 1.5% of transactions; its text and table say 3 months of chargebacks against one month's sales transactions. This file follows the text and the table.",
+      "guideSection": "Which chargeback ratio thresholds apply to my account?"
+    },
+    {
+      "id": "braintree-vamp-fines",
+      "name": "Braintree fines under Visa VAMP",
+      "network": "Visa",
+      "kind": "provider rule (PayPal Braintree)",
+      "basis": "provider",
+      "appliesTo": "Braintree merchants, when their acquirer reaches either Visa acquirer level",
+      "region": "not stated in the guide",
+      "effectiveFrom": "the fees: USD 8 at Excessive from 2025-10-01, USD 4 at Above Standard from 2026-01-01",
+      "period": "monthly",
+      "howItCounts": "The merchant's own VAMP ratio. The fine is charged per count, meaning per fraud report or dispute.",
+      "howItCountsSource": "braintree-2026",
+      "ratio": { "bps": 50, "rule": "at least", "text": "the merchant's own VAMP ratio at 50 bps (0.5%) or more" },
+      "minimums": [],
+      "minimumsNote": "The guide states no minimum count for this rule.",
+      "threshold": "The merchant's own VAMP ratio at 50 bps or more, while the acquirer is at either Visa acquirer level",
+      "fees": [
+        { "usdPerCount": 4, "acquirerLevel": "Above Standard", "from": "2026-01-01" },
+        { "usdPerCount": 8, "acquirerLevel": "Excessive", "from": "2025-10-01" }
+      ],
+      "feeNote": "A ratio is a share of events, while these fees are charged per count, so you need the count as well as the percentage.",
+      "computeFrom": null,
+      "notComputed": "This rule uses the merchant's own VAMP ratio and the acquirer's Visa level, which two numbers of chargebacks and transactions do not give.",
+      "ask": "For a Visa charge, ask for your acquirer's VAMP level, how many events were billed, the fee per event, and the agreement clause the provider relies on to pass the fee on.",
+      "source": "braintree-2026",
+      "caveat": "Applies to Braintree merchants only. The guide's sentence on the two fees names Braintree but carries no link; the guide's Braintree source is Network Updates 2026.",
+      "guideSection": "How do I check an unexpected card-network compliance fine?"
+    },
+    {
+      "id": "shopify-payments-risk-review",
+      "name": "Shopify Payments risk action",
+      "network": null,
+      "kind": "provider rule (Shopify Payments)",
+      "basis": "provider",
+      "appliesTo": "stores on Shopify Payments",
+      "region": "not stated in the guide",
+      "effectiveFrom": "not stated in the guide",
+      "period": "ongoing risk review",
+      "howItCounts": "No ratio: an ongoing risk review.",
+      "howItCountsSource": "shopify-practices",
+      "ratio": null,
+      "minimums": [],
+      "threshold": "No universal shutdown cutoff",
+      "computeFrom": null,
+      "notComputed": "Shopify's risk review has no published ratio to compare with.",
+      "publishedFollowUp": "Shopify can decline, deactivate or restrict an account before chargebacks reach any card-network threshold. Inaccurate product listings, subscriptions sold on deceptive terms, inauthentic reviews and unreliable fulfilment can count against a store while chargebacks stay low.",
+      "ask": "After a warning or closure notice, ask for the ratio and the calculation behind it, the remediation and evidence it wants, and its deadline.",
+      "source": "shopify-practices",
+      "caveat": "Applies to Shopify Payments only.",
+      "guideSection": "Which chargeback ratio thresholds apply to my account?"
+    }
+  ],
+  "facts": [
+    {
+      "id": "no-universal-line",
+      "text": "No chargeback ratio is a universal shutdown line: Shopify can restrict an account before any card-network threshold.",
+      "source": "shopify-practices"
+    },
+    {
+      "id": "ratio-and-minimum",
+      "text": "A small transaction count makes each chargeback a larger share of your transactions. A small account can reach a high percentage and still miss the merchant tests, because each also needs a minimum count or amount.",
+      "source": null
+    },
+    {
+      "id": "which-month",
+      "text": "Mastercard counts each month's chargebacks over the previous month's Mastercard transactions, so a July ratio uses June's transactions. It divides by the number of transactions, not by sales revenue.",
+      "source": "verifi"
+    },
+    {
+      "id": "dashboard-months",
+      "text": "The rate on your dashboard may use different months from Mastercard's count, so check with your provider which months that count used.",
+      "source": null
+    },
+    {
+      "id": "stripe-network-totals",
+      "text": "In network totals, Stripe can include disputes that its dashboard rate leaves out. If you suspect a network calculation error, you can ask Stripe support to investigate.",
+      "source": "stripe-monitoring",
+      "provider": "Stripe"
+    },
+    {
+      "id": "won-disputes",
+      "text": "A dispute you win still counts in the monitoring totals.",
+      "source": null
+    },
+    {
+      "id": "rdr",
+      "text": "Disputes settled through Rapid Dispute Resolution (RDR), a pre-dispute service, stay out of the VAMP ratio, depending on when the data is pulled. Ask your provider whether it offers RDR.",
+      "source": "checkout-vamp"
+    },
+    {
+      "id": "fraud-reports",
+      "text": "A fraud report (TC40) is a card issuer's flag on a payment it suspects is fraudulent; Stripe and Shopify show it as an early fraud warning. It counts in the VAMP ratio even when no dispute follows, unless it qualifies for Visa's Compelling Evidence 3.0 exclusion.",
+      "source": "shopify-monitoring",
+      "sourceNote": "The guide links Shopify's page for the term early fraud warning; the sentence on counting carries no link of its own."
+    },
+    {
+      "id": "acquirer",
+      "text": "Your acquirer is the bank or processor that settles your card payments. Visa points VAMP questions to your acquirer or processor, so if you sell through Stripe or Shopify Payments, ask that provider which test applies.",
+      "source": null
+    },
+    {
+      "id": "visa-needs-fraud-reports",
+      "text": "Visa's ratio also counts fraud reports, so get your VAMP ratio and your acquirer's Visa level from your provider.",
+      "source": null
+    }
+  ],
+  "askYourProvider": {
+    "always": [
+      "Which test applies to you, and on which merchant ID and data month it was measured.",
+      "Your VAMP ratio and your acquirer's Visa level.",
+      "Which months its dashboard rate and the network's count used."
+    ],
+    "forAFine": [
+      "The programme and monitoring level attached to the charge.",
+      "The data month, merchant ID and region used to place you in the programme.",
+      "The chargeback or fraud and dispute count and the transaction count used for the ratio.",
+      "Your acquirer's VAMP level, for a Visa charge.",
+      "How many events were billed, the fee per event, and the agreement clause your provider relies on to pass the fee on."
+    ],
+    "afterAWarningOrClosure": [
+      "The ratio and the calculation behind it.",
+      "The remediation and evidence it wants.",
+      "Its deadline and where to send your response."
+    ]
+  }
+}

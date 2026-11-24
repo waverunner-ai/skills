@@ -9,7 +9,8 @@
     {
       "name": "payments",
       "source": "./",
-      "description": "Skills for people who run online shops and subscriptions. The first one reads a month's SEPA Direct Debit return file and says which debits to collect again, when, and what to fix first."
+      "description": "Skills for people who run online shops and subscriptions: a SEPA Direct Debit returns check that says which returned debits to collect again and when, and a chargeback ratio check that sets your ratio beside the published Visa and Mastercard thresholds.",
+      "version": "0.2.0"
     }
   ]
 }
