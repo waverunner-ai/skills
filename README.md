@@ -1,4 +1,4 @@
-# Payments skills
+# Waverunner skills
 
 Skills for people who run online shops and subscriptions, for use with Claude and other assistants that read the
 open skill format. A skill is a folder of instructions and data that an assistant loads when your
@@ -57,8 +57,8 @@ EPC sets no retry rule. The skill keeps the two apart in every answer.
 **Claude Code**
 
 ```
-/plugin marketplace add Rocketlink-Technologies-Limited/payments-skills
-/plugin install payments-skills@payments-skills
+/plugin marketplace add waverunner-ai/skills
+/plugin install payments-skills@waverunner-ai
 ```
 
 **Any other assistant that reads skills:** copy `skills/sepa-returns-check/` into its skills folder.
