@@ -1,0 +1,14 @@
+{
+  "name": "payments-skills",
+  "owner": {
+    "name": "Waverunner",
+    "url": "https://waverunner.ai"
+  },
+  "plugins": [
+    {
+      "name": "payments-skills",
+      "source": "./",
+      "description": "Skills for people who run online shops and subscriptions. The first one reads a month's SEPA Direct Debit return file and says which debits to collect again, when, and what to fix first."
+    }
+  ]
+}

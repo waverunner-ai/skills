@@ -1,0 +1,627 @@
+{
+  "name": "SEPA Direct Debit return codes with collect-again defaults",
+  "publisher": "Waverunner",
+  "url": "https://waverunner.ai/tools/sepa-return-codes/",
+  "license": {
+    "name": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "attribution": "Waverunner, https://waverunner.ai/tools/sepa-return-codes/",
+  "updated": "2026-11-06",
+  "licenseScope": "CC BY 4.0 covers Waverunner's own defaults and text, not the codes, names and types from the EPC guidance and the ISO 20022 code set.",
+  "note": "Codes, names, types and possible causes follow the European Payments Council (EPC) reason-code guidance v8.1 (30 September 2026). Whether to collect a returned debit again, and how long to wait first, are Waverunner defaults, not EPC rules.",
+  "sources": [
+    {
+      "publisher": "European Payments Council",
+      "title": "EPC173-14 Guidance on Reason Codes for SDD R-transactions, version 8.1",
+      "published": "2026-09-30",
+      "url": "https://www.europeanpaymentscouncil.eu/sites/default/files/kb/file/2026-09/EPC173-14%20v8.1%20Guidance%20on%20Reason%20Codes%20for%20SDD%20R-transactions.pdf"
+    },
+    {
+      "publisher": "European Payments Council",
+      "title": "SEPA Direct Debit Core Scheme Rulebook 2025, version 1.1",
+      "url": "https://www.europeanpaymentscouncil.eu/sites/default/files/kb/file/2025-10/EPC016-06%202025%20SDD%20Core%20Rulebook%20version%201.1.pdf"
+    }
+  ],
+  "codes": [
+    {
+      "code": "AC01",
+      "name": "Incorrect Account Number",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/ac01/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Several parties",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "Not until the IBAN is corrected",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "AC01 means the account number (IBAN) on the debit is incorrect. Get the right IBAN from the customer before you collect again.",
+      "whoCaused": "The customer or you. The customer may have given wrong details, or your customer database may hold a wrong IBAN. A technical problem when you issued the collection can also cause it, and the code alone does not say which.",
+      "collectAgainDetail": "Not until the IBAN is corrected. Ask the customer for the right account number before the next debit. On Mollie, an AC01 may cancel the subscription at once.",
+      "customerMessage": "Your payment of [amount] on [date] did not go through because the bank did not accept the account number. Update your bank details here: [link].",
+      "epcPage": "5"
+    },
+    {
+      "code": "AC04",
+      "name": "Closed Account Number",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/ac04/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "The customer",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "Not from the closed account",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": true,
+      "description": "The customer closed the bank account behind an AC04 return. Ask them for a new account before collecting again; Mollie may cancel the subscription at once.",
+      "whoCaused": "The customer. They closed the account after your previous collection from it, so this debit went to details that no longer work.",
+      "collectAgainDetail": "Waverunner's default is no collection from the closed account. Mollie may cancel the subscription at once after an AC04.",
+      "customerMessage": "We could not collect [amount] on [date] because the bank account is closed. Add a different account here: [link].",
+      "epcPage": "5"
+    },
+    {
+      "code": "AC06",
+      "name": "Blocked Account",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/ac06/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "The customer’s bank",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "Not from the blocked account",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "AC06 tells you the customer's bank blocked the account. Ask the customer for another account or way to pay; Mollie may cancel the subscription at once.",
+      "whoCaused": "The customer's bank. It blocked the account or this collection under a court order, or blocked the account over suspected misuse or at the customer's request.",
+      "collectAgainDetail": "Not from the blocked account. Ask the customer for another account or another way to pay. If you collect through Mollie, AC06 may cancel the subscription straight away.",
+      "customerMessage": "The [amount] payment due on [date] could not be taken from this account. Choose another way to pay here: [link].",
+      "epcPage": "5 to 6"
+    },
+    {
+      "code": "AC13",
+      "name": "Invalid Debtor Account Type",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/ac13/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "B2B only",
+      "possibleCause": "The customer or the account type",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "Not as a B2B debit",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "AC13 comes back when a B2B direct debit reaches a consumer account. Agree another way to pay, or a Core mandate, with the customer before collecting again.",
+      "whoCaused": "Two of the three causes sit with the customer. A consumer may have signed a B2B mandate without knowing it is only for non-consumers, or given details of the wrong account. The third, an account type that cannot take B2B debits, names no party.",
+      "collectAgainDetail": "Not as a B2B debit. Agree another way to pay, or a Core mandate, with the customer first.",
+      "customerMessage": "We could not collect [amount] on [date] because your account does not accept the business direct debit we set up. Choose another way to pay here: [link].",
+      "epcPage": "6"
+    },
+    {
+      "code": "AG01",
+      "name": "Transaction Forbidden",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/ag01/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "The customer",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "Not from that account",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "With AG01, the account cannot take direct debits for regulatory reasons, a savings account for example. Agree another account or way to pay first.",
+      "whoCaused": "The customer, who gave you an account that direct debits cannot be taken from. The limit is the account type, for example a savings account.",
+      "collectAgainDetail": "Not from that account. We suggest agreeing another account or another payment method with the customer before the next debit.",
+      "customerMessage": "Your account type does not allow direct debits, so we could not collect [amount] on [date]. Choose another account or way to pay here: [link].",
+      "epcPage": "6"
+    },
+    {
+      "code": "AG02",
+      "name": "Invalid Bank Operation Code",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/ag02/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "You or your collection data",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "Not until the operation code, sequence or file information is fixed",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "AG02 flags a wrong operation code, sequence type or file format in your collection. Correct the collection data before you submit it again.",
+      "whoCaused": "You, as the creditor: a technical error, or a mistake in the collection or its file sequence. It covers a recurring debit sent after a one-off, a one-off sent after a recurring one, and a wrong scheme identification code.",
+      "collectAgainDetail": "Not until the operation code, sequence or file information is fixed. Your provider can help you find the wrong field.",
+      "customerMessage": null,
+      "epcPage": "6 to 7"
+    },
+    {
+      "code": "AM04",
+      "name": "Insufficient Funds",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/am04/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Several parties",
+      "collectAgain": {
+        "action": "retry",
+        "decision": "Yes, at most 2 times, when your notice period and our 5-day wait have both run",
+        "afterDays": 5,
+        "maxRetries": 2,
+        "askFirst": false
+      },
+      "canArriveAsMs03": true,
+      "description": "AM04 means insufficient funds. Our default: tell the customer the new date, then collect again when your notice period ends, at most twice.",
+      "whoCaused": "The customer or you. The customer's account can be short of funds, or you may have sent the pre-notification late or not at all.",
+      "collectAgainDetail": "Waverunner's default is at most two new attempts, each at least 5 days after you send the pre-notification with the new date. Core, the scheme open to consumers and businesses, needs that pre-notification at least 14 calendar days before collection unless you agreed a different period. Stripe can retry at most twice within 30 days of the original attempt if Direct Debit retries are enabled. Mollie may retry subscriptions up to 5 times, once daily, depending on the failure reason; check your provider's schedule before adding your own attempt.",
+      "customerMessage": "Your payment of [amount] on [date] did not go through. Tell us here when your account will have funds: [link]. We will confirm the new collection date with you before we collect again.",
+      "epcPage": "7"
+    },
+    {
+      "code": "AM05",
+      "name": "Duplication",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/am05/",
+      "comesAs": [
+        "Reject",
+        "Return",
+        "Reversal"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Several parties",
+      "collectAgain": {
+        "action": "stop",
+        "decision": "No, not this attempt",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "AM05 flags a debit as a duplicate of one sent very recently. Stop this attempt and check whether the original debit already covers the payment.",
+      "whoCaused": "Possibly you or your bank: a technical or human error on your side can send the same collection twice.",
+      "collectAgainDetail": "No, not this attempt. Check whether the original payment already arrived, then decide whether anything is still due.",
+      "customerMessage": null,
+      "epcPage": "7"
+    },
+    {
+      "code": "BE05",
+      "name": "Unrecognised Initiating Party",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/be05/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "You or your collection data",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "Only once the creditor identifier is corrected",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "BE05 points to your creditor identifier: it is wrong, or it changed without an amendment being reported. Correct it before collecting again.",
+      "whoCaused": "You: either a technical error, or a change to your creditor identifier that was never reported as an amendment.",
+      "collectAgainDetail": "Only once the creditor identifier is corrected. If the identifier changed, ask your provider how to report the amendment.",
+      "customerMessage": null,
+      "epcPage": "7"
+    },
+    {
+      "code": "CNOR",
+      "name": "Creditor Bank Is Not Registered",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/cnor/",
+      "comesAs": [
+        "Reject"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Your bank or payment provider",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "Not until your bank's registration is fixed",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "CNOR means your bank is not registered in the clearing system under the BIC it used. Ask your provider to fix the registration before resubmitting.",
+      "whoCaused": "Your bank, which is not, or no longer, declared as an indirect participant in the clearing system.",
+      "collectAgainDetail": "Not until your bank's registration is fixed. Once your provider confirms it, submit the collection again.",
+      "customerMessage": null,
+      "epcPage": "7"
+    },
+    {
+      "code": "DNOR",
+      "name": "Debtor Bank Is Not Registered",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/dnor/",
+      "comesAs": [
+        "Reject"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Several parties",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "Not by the same route until reachability is fixed",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "DNOR means the customer's bank is not registered in the clearing system under its BIC. Ask your provider to check that the bank can be reached.",
+      "whoCaused": "You or your bank. The customer's bank is the one not registered, but the cause is on your side: you or your bank did not check beforehand that it could be reached.",
+      "collectAgainDetail": "Not by the same route until reachability is fixed. Ask your provider to check the customer's bank; if it cannot be reached, agree another way to pay with the customer.",
+      "customerMessage": "We could not collect [amount] on [date] through your bank. Choose another way to pay here: [link].",
+      "epcPage": "7 to 8"
+    },
+    {
+      "code": "ED05",
+      "name": "Settlement Failed",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/ed05/",
+      "comesAs": [
+        "Reject"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "The customer’s bank",
+      "collectAgain": {
+        "action": "retry",
+        "decision": "Yes, once, after your provider confirms settlement can go ahead, when your notice period and our 2-day wait have both run",
+        "afterDays": 2,
+        "maxRetries": 1,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "ED05 means settlement between the banks failed. Our default is one retry, once your provider confirms the debit can settle and your notice period has run.",
+      "whoCaused": "The customer's bank. Its funding for settling direct debits with other banks was not enough for this transaction.",
+      "collectAgainDetail": "Yes, once, after your provider confirms that settlement can go ahead. Then pre-notify the customer of the new date: a Core debit needs that notice at least 14 calendar days ahead unless you agreed a different period. Our 2-day wait runs from the same day, so the notice sets the date unless it is shorter than 2 days.",
+      "customerMessage": null,
+      "epcPage": "8"
+    },
+    {
+      "code": "FF01",
+      "name": "Invalid File Format",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/ff01/",
+      "comesAs": [
+        "Reject"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Several parties",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "After the XML file is repaired",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "FF01 rejects a collection file whose XML is invalid. Repair the file, or the validation check that missed it, with your provider before resending.",
+      "whoCaused": "You, your bank or the clearing system. The XML may be filled in wrongly or contain a syntax error. Or your bank, an intermediary bank or the clearing system skipped the validation check before submitting the file.",
+      "collectAgainDetail": "After the XML file is repaired. Work through the file error with your provider; the customer has nothing to correct for FF01.",
+      "customerMessage": null,
+      "epcPage": "8"
+    },
+    {
+      "code": "MD01",
+      "name": "No Mandate",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/md01/",
+      "comesAs": [
+        "Reject",
+        "Return",
+        "Refund"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Several parties",
+      "collectAgain": {
+        "action": "stop",
+        "decision": "No, not until you have a valid mandate",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "MD01 means no valid mandate covers the debit. Stop collecting until you have one; as a refund, MD01 applies to Core collections only.",
+      "whoCaused": "Check the bank's mandate status, the customer's cancellation or B2B confirmation, and the mandate reference you sent. MD01 alone does not identify which party needs to act.",
+      "collectAgainDetail": "No, not until you have a valid mandate. Stop collecting meanwhile, including while a B2B confirmation or a reference fix is pending. Mollie may cancel the subscription after the third MD01.",
+      "customerMessage": "Your bank reported a problem with the direct debit authorisation for the [amount] debit dated [date]. Review or renew your authorisation here: [link].",
+      "epcPage": "8 to 9"
+    },
+    {
+      "code": "MD02",
+      "name": "Missing Mandatory Mandate Information in Mandate",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/md02/",
+      "comesAs": [
+        "Reject"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Not stated",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "Not until the mandate amendment or its data is repaired",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "MD02 means mandate data is missing or incorrect. Repair the amendment details, or the way they were submitted, before sending another collection.",
+      "whoCaused": "No party is named. The amendment either did not follow the scheme rules, or the amended information is wrong.",
+      "collectAgainDetail": "Not until the mandate amendment or its data is repaired. Your provider can help you check what you submitted against the mandate you hold.",
+      "customerMessage": null,
+      "epcPage": "9 to 10"
+    },
+    {
+      "code": "MD06",
+      "name": "Refund Request By End Customer",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/md06/",
+      "comesAs": [
+        "Refund"
+      ],
+      "scheme": "Core only",
+      "possibleCause": "Not stated",
+      "collectAgain": {
+        "action": "contact",
+        "decision": "Not automatically",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "With MD06, the customer had a Core debit refunded. Talk to them before you collect again; Waverunner recommends no automatic retry of that debit.",
+      "whoCaused": "The cause is either a debit that did not match the amount in your pre-notification, or the customer's unconditional right to a refund. A refund request alone does not mean you made a mistake.",
+      "collectAgainDetail": "Waverunner recommends no automatic retry of the refunded debit. Contact the customer and agree how to continue. After a Stripe dispute, check whether Stripe deactivated a mandate covering repeat payments; if so, the customer must accept it again before you collect. Mollie may cancel the subscription after 3 MD06 failures.",
+      "customerMessage": "Your [amount] debit dated [date] was refunded. If you want to continue, tell us how you would like to pay here: [link].",
+      "epcPage": "10"
+    },
+    {
+      "code": "MD07",
+      "name": "End Customer Deceased",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/md07/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Not stated",
+      "collectAgain": {
+        "action": "stop",
+        "decision": "No",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": true,
+      "description": "MD07 reports that the customer has died. Stop collecting and close the agreement with the deceased customer instead of sending another payment request.",
+      "whoCaused": "No party is named.",
+      "collectAgainDetail": "No. Stop collecting and close the agreement. Mollie may cancel the subscription as soon as MD07 arrives.",
+      "customerMessage": null,
+      "epcPage": "10"
+    },
+    {
+      "code": "MS02",
+      "name": "Not Specified Reason Customer Generated",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/ms02/",
+      "comesAs": [
+        "Reject",
+        "Return",
+        "Reversal",
+        "Refusal"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "The customer",
+      "collectAgain": {
+        "action": "contact",
+        "decision": "Not before you talk to the customer",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "MS02 means the customer refused the debit after your pre-notification. Talk to them before another debit; Mollie may cancel after 3 such failures.",
+      "whoCaused": "The customer refused the collection.",
+      "collectAgainDetail": "For MS02, Waverunner's default is customer agreement before another debit. Mollie may cancel the subscription after 3 MS02 failures.",
+      "customerMessage": "Your [amount] debit dated [date] was not completed. Tell us here how you would like to handle this payment: [link].",
+      "epcPage": "10"
+    },
+    {
+      "code": "MS03",
+      "name": "Not Specified Reason Agent Generated",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/ms03/",
+      "comesAs": [
+        "Reject",
+        "Return",
+        "Reversal"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Not stated",
+      "collectAgain": {
+        "action": "retry",
+        "decision": "After asking, then once, when your notice period and our 7-day wait have both run",
+        "afterDays": 7,
+        "maxRetries": 1,
+        "askFirst": true
+      },
+      "canArriveAsMs03": false,
+      "description": "MS03 comes with no specific reason from the bank. Ask the customer or your provider which reason applies before the one retry our default allows.",
+      "whoCaused": "Who is at fault depends on the hidden reason. Where national law bars the specific code, MS03 can stand in for AC04, AM04, MD07, RR01, RR02, RR03 or RR04: a closed account, insufficient funds, a deceased account holder, missing details or another regulatory reason. In Germany, for example, a bank returning a debit for insufficient funds (AM04) sends MS03 instead, though AM04 can still arrive from outside Germany. Sparkasse KölnBonn also reports a deceased account holder (MD07) and another regulatory reason (RR04) as MS03, for data-protection reasons.",
+      "collectAgainDetail": "Not before you ask the customer or your provider which reason applies: a closed account needs new details, and a death means closing the agreement. If neither applies and you still want to collect, our default is one retry. Send your pre-notification and collect when its notice period ends: at least 14 calendar days for a Core debit unless you agreed a different one, and never sooner than 7 days. Mollie may cancel a subscription after 3 failures with MS03.",
+      "customerMessage": "Your bank returned the [amount] payment from [date] without giving a reason. If your payment details have changed or you want to talk about this payment, reach us here: [link].",
+      "epcPage": "10 to 11"
+    },
+    {
+      "code": "RC01",
+      "name": "Bank Identifier Incorrect",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/rc01/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Several parties",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "After the BIC is corrected",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "RC01 points to a wrong BIC (bank identifier code), including an incomplete one on a non-EEA collection. Ask your provider to correct it.",
+      "whoCaused": "It depends where the BIC went wrong. You caused it if you gave an incomplete BIC, 8 characters instead of 11, for a non-EEA collection. Your bank, the clearing system or the customer's bank caused it if the BIC in the interbank message does not exist.",
+      "collectAgainDetail": "After the BIC is corrected. Ask your provider to put the complete, correct BIC in the message, and ask the customer for theirs on a non-EEA collection.",
+      "customerMessage": "We need to check your bank details before we can collect [amount], due on [date]. Confirm them here: [link].",
+      "epcPage": "11"
+    },
+    {
+      "code": "RR01",
+      "name": "Missing Debtor Account Or Identification",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/rr01/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Not stated",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "Not until the account or identification data is complete",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": true,
+      "description": "RR01 comes back when customer account or identification details that regulation requires are missing. Complete the data with your provider first.",
+      "whoCaused": "No party is named. The customer's IBAN or unique identification, needed for regulatory requirements, is missing or insufficient.",
+      "collectAgainDetail": "Not until the account or identification data is complete. Your provider can tell you what is missing so you can complete the collection record.",
+      "customerMessage": "Some payment details are missing, so we could not collect [amount] on [date]. Complete them here: [link].",
+      "epcPage": "11"
+    },
+    {
+      "code": "RR02",
+      "name": "Missing Debtor Name Or Address",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/rr02/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Not stated",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "Only after the name or address information is corrected",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": true,
+      "description": "RR02 flags customer name or address details that are missing, insufficient or invalid. Correct the collection details with your provider first.",
+      "whoCaused": "Nobody is named. The customer's name or address, needed for regulatory requirements, is missing or insufficient. The code does not say whether you or the customer left it out.",
+      "collectAgainDetail": "Only after the name or address information is corrected. Ask your provider which information or address format it needs, then update the collection record.",
+      "customerMessage": "Before we can collect [amount], due on [date], we need to check your name and address. Review them here: [link].",
+      "epcPage": "11 to 12"
+    },
+    {
+      "code": "RR03",
+      "name": "Missing Creditor Name Or Address",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/rr03/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Not stated",
+      "collectAgain": {
+        "action": "fix",
+        "decision": "Not until your creditor information is corrected",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": true,
+      "description": "RR03 points to your own creditor name or address details, which need correcting. Fix your business information with your payment provider first.",
+      "whoCaused": "No party is named, but the data at fault is your own: your creditor name or address.",
+      "collectAgainDetail": "Not until your creditor information is corrected. Fix the business name or address format with your provider; the customer has no bank details to change.",
+      "customerMessage": null,
+      "epcPage": "12"
+    },
+    {
+      "code": "RR04",
+      "name": "Regulatory Reason",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/rr04/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Not stated",
+      "collectAgain": {
+        "action": "stop",
+        "decision": "Not for now",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": true,
+      "description": "RR04 stops a debit for a regulatory reason other than missing account, name or address details. Stop collecting and ask your provider why.",
+      "whoCaused": "No party, and no cause is given: RR04 covers regulatory reasons other than those RR01, RR02 and RR03 cover.",
+      "collectAgainDetail": "Not for now. Stop collecting until your provider explains which restriction applies and what, if anything, would resolve it.",
+      "customerMessage": null,
+      "epcPage": "12"
+    },
+    {
+      "code": "SL01",
+      "name": "Specific Service Offered By Debtor Agent",
+      "url": "https://waverunner.ai/tools/sepa-return-codes/sl01/",
+      "comesAs": [
+        "Reject",
+        "Return"
+      ],
+      "scheme": "Core and B2B",
+      "possibleCause": "Not stated",
+      "collectAgain": {
+        "action": "contact",
+        "decision": "Not before you talk to the customer",
+        "afterDays": null,
+        "maxRetries": 0,
+        "askFirst": false
+      },
+      "canArriveAsMs03": false,
+      "description": "SL01 means a service at the customer's bank, such as a creditor block or an amount limit, stopped the debit. Ask the customer before another debit.",
+      "whoCaused": "SL01 names no party. The cause is a service on the customer's bank account, such as a block they set against you or a limit on amount or frequency.",
+      "collectAgainDetail": "Not before you talk to the customer. We recommend agreeing with them how to pay, because the bank's block or limit may still apply. Three SL01 failures may end a Mollie subscription.",
+      "customerMessage": "A block or limit on your bank account stopped the [amount] debit on [date]. Tell us how you would like to pay here: [link].",
+      "epcPage": "12 to 13"
+    }
+  ]
+}
