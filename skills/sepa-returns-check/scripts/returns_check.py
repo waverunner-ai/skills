@@ -46,7 +46,7 @@ PLAIN_NUMBER = re.compile(r"^-?\d+(?:\.\d+)?$")
 
 REASON_HEADER = re.compile(r"reason|code|grund|reden|motif|motivo|causale|rsn", re.I)
 AMOUNT_HEADER = re.compile(r"amount|betrag|bedrag|montant|import[eo]|\bvalue\b|\bsum(?:me)?\b", re.I)
-DATE_HEADER = re.compile(r"date|datum|fecha|data|dt", re.I)
+DATE_HEADER = re.compile(r"date|datum|fecha|data|dt|f[aä]e?llig|[eé]ch[eé]ance|vervaldag|scadenza|vencimiento", re.I)
 # A reference column holds an ID. "Mandate holder" or "Customer name" is a person, never a reference.
 REF_HEADER = re.compile(
     r"end.?to.?end|e2e|referen|kenmerk|r[eé]f[eé]rence|riferimento|mandat\w*[\s_-]*(?:id|ref|nr|no|num)|\bref\b", re.I

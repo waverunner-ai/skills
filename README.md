@@ -58,7 +58,7 @@ EPC sets no retry rule. The skill keeps the two apart in every answer.
 
 ```
 /plugin marketplace add waverunner-ai/skills
-/plugin install payments-skills@waverunner-ai
+/plugin install payments@waverunner-ai
 ```
 
 **Any other assistant that reads skills:** copy `skills/sepa-returns-check/` into its skills folder.

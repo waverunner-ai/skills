@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- A made-up pain.002 status report. No real customer, account or mandate. -->
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03">
+  <CstmrPmtStsRpt>
+    <GrpHdr><MsgId>STS-EXAMPLE-1</MsgId><CreDtTm>2026-11-02T08:00:00</CreDtTm></GrpHdr>
+    <OrgnlGrpInfAndSts><OrgnlMsgId>COLL-EXAMPLE-1</OrgnlMsgId><OrgnlMsgNmId>pain.008.001.02</OrgnlMsgNmId><GrpSts>PART</GrpSts></OrgnlGrpInfAndSts>
+    <OrgnlPmtInfAndSts>
+      <OrgnlPmtInfId>PMT-EXAMPLE-1</OrgnlPmtInfId>
+      <TxInfAndSts>
+        <OrgnlEndToEndId>ORDER-1001</OrgnlEndToEndId><TxSts>RJCT</TxSts>
+        <StsRsnInf><Rsn><Cd>AM04</Cd></Rsn></StsRsnInf>
+        <OrgnlTxRef><Amt><InstdAmt Ccy="EUR">39.00</InstdAmt></Amt><ReqdColltnDt>2026-10-28</ReqdColltnDt></OrgnlTxRef>
+      </TxInfAndSts>
+      <TxInfAndSts>
+        <OrgnlEndToEndId>ORDER-1002</OrgnlEndToEndId><TxSts>RJCT</TxSts>
+        <StsRsnInf><Rsn><Cd>AM04</Cd></Rsn></StsRsnInf>
+        <OrgnlTxRef><Amt><InstdAmt Ccy="EUR">39.00</InstdAmt></Amt><ReqdColltnDt>2026-10-28</ReqdColltnDt></OrgnlTxRef>
+      </TxInfAndSts>
+      <TxInfAndSts>
+        <OrgnlEndToEndId>ORDER-1003</OrgnlEndToEndId><TxSts>RJCT</TxSts>
+        <StsRsnInf><Rsn><Cd>AC04</Cd></Rsn></StsRsnInf>
+        <OrgnlTxRef><Amt><InstdAmt Ccy="EUR">59.00</InstdAmt></Amt><ReqdColltnDt>2026-10-28</ReqdColltnDt></OrgnlTxRef>
+      </TxInfAndSts>
+      <TxInfAndSts>
+        <OrgnlEndToEndId>ORDER-1004</OrgnlEndToEndId><TxSts>RJCT</TxSts>
+        <StsRsnInf><Rsn><Cd>MD01</Cd></Rsn></StsRsnInf>
+        <OrgnlTxRef><Amt><InstdAmt Ccy="EUR">39.00</InstdAmt></Amt><ReqdColltnDt>2026-10-29</ReqdColltnDt></OrgnlTxRef>
+      </TxInfAndSts>
+      <TxInfAndSts>
+        <OrgnlEndToEndId>ORDER-1005</OrgnlEndToEndId><TxSts>RJCT</TxSts>
+        <StsRsnInf><Rsn><Cd>MS03</Cd></Rsn></StsRsnInf>
+        <OrgnlTxRef><Amt><InstdAmt Ccy="EUR">24.50</InstdAmt></Amt><ReqdColltnDt>2026-10-29</ReqdColltnDt></OrgnlTxRef>
+      </TxInfAndSts>
+      <TxInfAndSts>
+        <OrgnlEndToEndId>ORDER-1006</OrgnlEndToEndId><TxSts>ACCP</TxSts>
+      </TxInfAndSts>
+    </OrgnlPmtInfAndSts>
+  </CstmrPmtStsRpt>
+</Document>

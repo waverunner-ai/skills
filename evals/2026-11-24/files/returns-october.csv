@@ -1,0 +1,6 @@
+Reference;Collection date;Amount;Reason code;Reason
+ORDER-2001;28.10.2026;39,00 EUR;AM04;Insufficient funds
+ORDER-2002;28.10.2026;59,00 EUR;MD06;Refund request by customer
+ORDER-2003;29.10.2026;1.239,00 EUR;MD07;Customer deceased
+ORDER-2004;29.10.2026;39,00 EUR;SL01;Specific service offered by the customer's bank
+ORDER-2005;30.10.2026;19,90 EUR;AB05;Timeout at the creditor's bank

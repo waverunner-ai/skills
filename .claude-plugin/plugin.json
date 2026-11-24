@@ -1,5 +1,5 @@
 {
-  "name": "payments-skills",
+  "name": "payments",
   "version": "0.1.0",
   "description": "Skills for people who run online shops and subscriptions. The first one reads a month's SEPA Direct Debit return file and says which debits to collect again, when, and what to fix first.",
   "author": {

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.054.001.02">
+  <BkToCstmrDbtCdtNtfctn>
+    <GrpHdr><MsgId>NTF-EVAL-1</MsgId><CreDtTm>2026-11-04T07:30:00</CreDtTm></GrpHdr>
+    <Ntfctn>
+      <Id>NTF-EVAL-1-1</Id>
+      <Ntry>
+        <Amt Ccy="EUR">49.90</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-11-03</Dt></BookgDt>
+        <NtryDtls><TxDtls>
+          <Refs><EndToEndId>SUB-7001</EndToEndId></Refs>
+          <RtrInf><Rsn><Cd>AM04</Cd></Rsn></RtrInf>
+        </TxDtls></NtryDtls>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">120.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-11-03</Dt></BookgDt>
+        <NtryDtls><TxDtls>
+          <Refs><EndToEndId>SUB-7002</EndToEndId></Refs>
+          <RtrInf><Rsn><Cd>AM04</Cd></Rsn></RtrInf>
+        </TxDtls></NtryDtls>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">30.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-11-04</Dt></BookgDt>
+        <NtryDtls><TxDtls>
+          <Refs><EndToEndId>SUB-7003</EndToEndId></Refs>
+          <RtrInf><Rsn><Cd>ED05</Cd></Rsn></RtrInf>
+        </TxDtls></NtryDtls>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">75.50</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-11-04</Dt></BookgDt>
+        <NtryDtls><TxDtls>
+          <Refs><EndToEndId>SUB-7004</EndToEndId></Refs>
+          <RtrInf><Rsn><Cd>AC01</Cd></Rsn></RtrInf>
+        </TxDtls></NtryDtls>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">29.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-11-04</Dt></BookgDt>
+        <NtryDtls><TxDtls>
+          <Refs><EndToEndId>SUB-7005</EndToEndId></Refs>
+          <RtrInf><Rsn><Cd>MD06</Cd></Rsn></RtrInf>
+        </TxDtls></NtryDtls>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">19.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-11-04</Dt></BookgDt>
+        <NtryDtls><TxDtls>
+          <Refs><EndToEndId>SUB-7006</EndToEndId></Refs>
+          <RtrInf><Rsn><Cd>MS03</Cd></Rsn></RtrInf>
+        </TxDtls></NtryDtls>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">250.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-11-04</Dt></BookgDt>
+        <NtryDtls><TxDtls>
+          <Refs><EndToEndId>PAYOUT-0042</EndToEndId></Refs>
+        </TxDtls></NtryDtls>
+      </Ntry>
+    </Ntfctn>
+  </BkToCstmrDbtCdtNtfctn>
+</Document>

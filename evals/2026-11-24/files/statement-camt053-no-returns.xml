@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.02">
+  <BkToCstmrStmt>
+    <GrpHdr><MsgId>STMT-EVAL-1</MsgId><CreDtTm>2026-11-05T06:00:00</CreDtTm></GrpHdr>
+    <Stmt>
+      <Id>STMT-EVAL-1-1</Id>
+      <Ntry>
+        <Amt Ccy="EUR">39.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-11-03</Dt></BookgDt>
+        <NtryDtls><TxDtls><Refs><EndToEndId>ORDER-3001</EndToEndId></Refs></TxDtls></NtryDtls>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">59.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-11-03</Dt></BookgDt>
+        <NtryDtls><TxDtls><Refs><EndToEndId>ORDER-3002</EndToEndId></Refs></TxDtls></NtryDtls>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">14.50</Amt><CdtDbtInd>DBIT</CdtDbtInd><Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-11-04</Dt></BookgDt>
+        <NtryDtls><TxDtls><Refs><EndToEndId>FEE-NOV</EndToEndId></Refs></TxDtls></NtryDtls>
+      </Ntry>
+    </Stmt>
+  </BkToCstmrStmt>
+</Document>

@@ -17,7 +17,10 @@ returns and gives that answer per debit, with the earliest date a new attempt ma
 
 ## Run it
 
-Paths here are relative to this skill's folder, the one that holds this file.
+The script sits in this skill's folder, the one that holds this file. Call it by its full path
+(`python <skill folder>/scripts/returns_check.py ...`) and do not change directory first: the script finds its own
+data, and some setups allow `python` but refuse `cd`. The lines below show the path from the skill folder. Always
+pass `--today` when the merchant names a date; without it the script uses the machine's date.
 
 A file:
 

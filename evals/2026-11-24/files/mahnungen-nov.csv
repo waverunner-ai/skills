@@ -1,0 +1,9 @@
+Kunde;Mandatsinhaber;Mandatsreferenz;Faelligkeit;Betrag;Rueckgabegrund;Anmerkung
+Anna Beispiel;Anna Beispiel;MND-0001;03.11.2026;1.249,00 EUR;AM04;Konto nicht gedeckt
+Bernd Muster;Bernd Muster GmbH;MND-0002;03.11.2026;89,5 EUR;md06;Kunde hat widersprochen
+Carla Test;Carla Test;MND-0003;04.11.2026;12,00;MD01;
+Dieter Probe;Dieter Probe;MND-0004;04.11.2026;2.500,75 EUR;MS03;ohne Angabe
+Eva Fiktiv;Eva Fiktiv;MND-0005;04.11.2026;39,90 EUR;AC04;
+Fritz Demo;Fritz Demo;MND-0006;05.11.2026;1.089,10 EUR;XX99;unbekannt
+Gerda Muster;Gerda Muster;MND-0007;05.11.2026;24,00 EUR;SL01;
+Hans Beispiel;Hans Beispiel;MND-0008;05.11.2026;310,00 EUR;;bezahlt

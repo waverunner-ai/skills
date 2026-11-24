@@ -1,0 +1,609 @@
+{
+  "today": "2026-11-24",
+  "questions": [
+    {
+      "id": "S1",
+      "group": "single",
+      "question": "A customer's direct debit for 39 euros came back with the code AM04. What does that mean, is it their fault or mine, and can I just try to collect again?",
+      "armBSuffix": "",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says AM04 means insufficient funds.",
+          "type": "scheme"
+        },
+        {
+          "n": 2,
+          "text": "Says the cause is not only the customer: the account can be short of funds, OR the merchant sent the pre-notification late or not at all (the code alone does not settle who).",
+          "type": "scheme"
+        },
+        {
+          "n": 3,
+          "text": "Says collecting again is possible later (not now), and gives the Waverunner default as a default: at most 2 new attempts, each at least 5 days after the new pre-notification.",
+          "type": "default"
+        },
+        {
+          "n": 4,
+          "text": "Mentions the advance notice: a Core debit needs pre-notification at least 14 calendar days before collection unless a different period was agreed.",
+          "type": "scheme"
+        }
+      ],
+      "wrong": [
+        "Presents the 2 attempts or the 5-day wait as a rule of the SEPA scheme or the EPC.",
+        "Says to collect again at once or the next day."
+      ],
+      "keySource": "returns_check.py --code AM04 (data/codes.json)"
+    },
+    {
+      "id": "S2",
+      "group": "single",
+      "question": "My bank returned a debit with the code MD01. What is that, and may I debit that customer again?",
+      "armBSuffix": "",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says MD01 means no mandate (no valid mandate covers the debit).",
+          "type": "scheme"
+        },
+        {
+          "n": 2,
+          "text": "Says do not collect again until a valid mandate exists (stop meanwhile).",
+          "type": "default"
+        },
+        {
+          "n": 3,
+          "text": "Says the code alone does not say who must act; check the bank's mandate status, a customer cancellation or B2B confirmation, and the mandate reference that was sent.",
+          "type": "scheme"
+        }
+      ],
+      "wrong": [
+        "Says to retry the debit.",
+        "States flatly that it is the customer's fault, or flatly the merchant's."
+      ],
+      "keySource": "returns_check.py --code MD01 (data/codes.json)"
+    },
+    {
+      "id": "S3",
+      "group": "single",
+      "question": "We got a refund claim with the reason MD06 on a 59 euro subscription payment. What does it mean, who caused it, and should I charge them again?",
+      "armBSuffix": "",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says MD06 means the customer had a Core debit refunded (refund request by the end customer).",
+          "type": "scheme"
+        },
+        {
+          "n": 2,
+          "text": "Says the cause is either a debit that did not match the amount in the pre-notification, or the customer's unconditional refund right; a refund request alone does not mean the merchant made a mistake.",
+          "type": "scheme"
+        },
+        {
+          "n": 3,
+          "text": "Says do not retry automatically; talk to the customer before collecting again.",
+          "type": "default"
+        }
+      ],
+      "wrong": [
+        "Says to charge them again automatically or at once.",
+        "Says a refund request proves the merchant made an error, or proves the customer did something wrong."
+      ],
+      "keySource": "returns_check.py --code MD06 (data/codes.json)"
+    },
+    {
+      "id": "S4",
+      "group": "single",
+      "question": "What does MS03 mean on a returned direct debit? Whose fault is it, and can I charge the customer again?",
+      "armBSuffix": "",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says MS03 means the bank gave no specific reason (reason not specified, agent generated).",
+          "type": "scheme"
+        },
+        {
+          "n": 2,
+          "text": "Says a real reason may be hidden behind it, naming at least two of AC04, AM04, MD07, RR01, RR02, RR03, RR04.",
+          "type": "scheme"
+        },
+        {
+          "n": 3,
+          "text": "Says ask the customer or the provider which reason applies before any new debit.",
+          "type": "default"
+        },
+        {
+          "n": 4,
+          "text": "Says the default afterwards is one retry, no sooner than 7 days, and with the Core pre-notification of at least 14 calendar days unless agreed otherwise.",
+          "type": "default"
+        }
+      ],
+      "wrong": [
+        "Says to retry straight away or blind.",
+        "States who is at fault as a fact (the code names no party; it depends on the hidden reason)."
+      ],
+      "keySource": "returns_check.py --code MS03 (data/codes.json)"
+    },
+    {
+      "id": "S5",
+      "group": "single",
+      "question": "A debit came back as AC04. Did the customer do something wrong, and can I just retry next week?",
+      "armBSuffix": "",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says AC04 means a closed account number (the customer closed the bank account).",
+          "type": "scheme"
+        },
+        {
+          "n": 2,
+          "text": "Says the customer caused it: they closed the account after the previous collection.",
+          "type": "scheme"
+        },
+        {
+          "n": 3,
+          "text": "Says do not collect from the closed account; ask the customer for a new account first.",
+          "type": "default"
+        }
+      ],
+      "wrong": [
+        "Says to retry the same account next week or soon."
+      ],
+      "keySource": "returns_check.py --code AC04 (data/codes.json)"
+    },
+    {
+      "id": "S6",
+      "group": "single",
+      "question": "One of my long-time subscribers' debits was returned with MD07. What does that mean and what should I do?",
+      "armBSuffix": "",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says MD07 means the customer is deceased (end customer deceased).",
+          "type": "scheme"
+        },
+        {
+          "n": 2,
+          "text": "Says stop collecting and close the agreement; no retry.",
+          "type": "default"
+        },
+        {
+          "n": 3,
+          "text": "Says no party is named as at fault (does not blame anyone).",
+          "type": "scheme"
+        }
+      ],
+      "wrong": [
+        "Says to retry or send another payment request to this customer."
+      ],
+      "keySource": "returns_check.py --code MD07 (data/codes.json)"
+    },
+    {
+      "id": "S7",
+      "group": "single",
+      "question": "My customer's bank bounced my debit with SL01. What is that? Do I try again?",
+      "armBSuffix": "",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says SL01 means a specific service offered by the customer's bank (for example a creditor block or an amount limit) stopped the debit.",
+          "type": "scheme"
+        },
+        {
+          "n": 2,
+          "text": "Says no party is named; the cause is a service on the customer's account, such as a block set against the merchant or a limit on amount or frequency.",
+          "type": "scheme"
+        },
+        {
+          "n": 3,
+          "text": "Says do not collect again before talking to the customer; the block or limit may still apply, so agree how to pay.",
+          "type": "default"
+        }
+      ],
+      "wrong": [
+        "Says to retry automatically without talking to the customer."
+      ],
+      "keySource": "returns_check.py --code SL01 (data/codes.json)"
+    },
+    {
+      "id": "S8",
+      "group": "single",
+      "question": "A debit was rejected with ED05. What does that mean, and can I simply send it again?",
+      "armBSuffix": "",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says ED05 means settlement between the banks failed.",
+          "type": "scheme"
+        },
+        {
+          "n": 2,
+          "text": "Says the cause is the customer's bank (its funding for settling direct debits with other banks was not enough).",
+          "type": "scheme"
+        },
+        {
+          "n": 3,
+          "text": "Says the default is one retry, only after the provider confirms settlement can go ahead, and after a new pre-notification (Core: at least 14 calendar days unless agreed otherwise).",
+          "type": "default"
+        }
+      ],
+      "wrong": [
+        "Says to resend at once or without checking with the provider.",
+        "Blames the customer for ED05."
+      ],
+      "keySource": "returns_check.py --code ED05 (data/codes.json)"
+    },
+    {
+      "id": "F1",
+      "group": "file",
+      "question": "Today is 2026-11-03. My bank sent me this file with my returned direct debits:\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:pain.002.001.03\">\n  <CstmrPmtStsRpt>\n    <GrpHdr><MsgId>STS-EXAMPLE-1</MsgId><CreDtTm>2026-11-02T08:00:00</CreDtTm></GrpHdr>\n    <OrgnlGrpInfAndSts><OrgnlMsgId>COLL-EXAMPLE-1</OrgnlMsgId><OrgnlMsgNmId>pain.008.001.02</OrgnlMsgNmId><GrpSts>PART</GrpSts></OrgnlGrpInfAndSts>\n    <OrgnlPmtInfAndSts>\n      <OrgnlPmtInfId>PMT-EXAMPLE-1</OrgnlPmtInfId>\n      <TxInfAndSts>\n        <OrgnlEndToEndId>ORDER-1001</OrgnlEndToEndId><TxSts>RJCT</TxSts>\n        <StsRsnInf><Rsn><Cd>AM04</Cd></Rsn></StsRsnInf>\n        <OrgnlTxRef><Amt><InstdAmt Ccy=\"EUR\">39.00</InstdAmt></Amt><ReqdColltnDt>2026-10-28</ReqdColltnDt></OrgnlTxRef>\n      </TxInfAndSts>\n      <TxInfAndSts>\n        <OrgnlEndToEndId>ORDER-1002</OrgnlEndToEndId><TxSts>RJCT</TxSts>\n        <StsRsnInf><Rsn><Cd>AM04</Cd></Rsn></StsRsnInf>\n        <OrgnlTxRef><Amt><InstdAmt Ccy=\"EUR\">39.00</InstdAmt></Amt><ReqdColltnDt>2026-10-28</ReqdColltnDt></OrgnlTxRef>\n      </TxInfAndSts>\n      <TxInfAndSts>\n        <OrgnlEndToEndId>ORDER-1003</OrgnlEndToEndId><TxSts>RJCT</TxSts>\n        <StsRsnInf><Rsn><Cd>AC04</Cd></Rsn></StsRsnInf>\n        <OrgnlTxRef><Amt><InstdAmt Ccy=\"EUR\">59.00</InstdAmt></Amt><ReqdColltnDt>2026-10-28</ReqdColltnDt></OrgnlTxRef>\n      </TxInfAndSts>\n      <TxInfAndSts>\n        <OrgnlEndToEndId>ORDER-1004</OrgnlEndToEndId><TxSts>RJCT</TxSts>\n        <StsRsnInf><Rsn><Cd>MD01</Cd></Rsn></StsRsnInf>\n        <OrgnlTxRef><Amt><InstdAmt Ccy=\"EUR\">39.00</InstdAmt></Amt><ReqdColltnDt>2026-10-29</ReqdColltnDt></OrgnlTxRef>\n      </TxInfAndSts>\n      <TxInfAndSts>\n        <OrgnlEndToEndId>ORDER-1005</OrgnlEndToEndId><TxSts>RJCT</TxSts>\n        <StsRsnInf><Rsn><Cd>MS03</Cd></Rsn></StsRsnInf>\n        <OrgnlTxRef><Amt><InstdAmt Ccy=\"EUR\">24.50</InstdAmt></Amt><ReqdColltnDt>2026-10-29</ReqdColltnDt></OrgnlTxRef>\n      </TxInfAndSts>\n      <TxInfAndSts>\n        <OrgnlEndToEndId>ORDER-1006</OrgnlEndToEndId><TxSts>ACCP</TxSts>\n      </TxInfAndSts>\n    </OrgnlPmtInfAndSts>\n  </CstmrPmtStsRpt>\n</Document>\n\nHow many debits came back, how much money is that, which ones should I collect again and when, and which should I leave alone?",
+      "armBSuffix": "(The same file is saved in this folder as files/returns-october.xml.)",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Counts 5 returned debits totalling 200.50 euros (ORDER-1006 with status ACCP is not a return).",
+          "type": "file"
+        },
+        {
+          "n": 2,
+          "text": "Says the two AM04 debits (ORDER-1001 and ORDER-1002, 78.00 euros together) may be collected again, earliest 2026-11-17, and says this assumes a new advance notice sent today.",
+          "type": "default"
+        },
+        {
+          "n": 3,
+          "text": "Says MD01 (ORDER-1004) is a stop until a valid mandate exists, and AC04 (ORDER-1003) is not to be collected from the closed account (needs a new account).",
+          "type": "default"
+        },
+        {
+          "n": 4,
+          "text": "Says MS03 (ORDER-1005) is not retried blind: ask the customer or provider which reason applies first.",
+          "type": "default"
+        }
+      ],
+      "wrong": [
+        "Counts ORDER-1006 as a return.",
+        "Gives a retry date before 2026-11-17 for the AM04 debits.",
+        "Says to retry MD01, AC04 or MS03 as they are."
+      ],
+      "keySource": "returns_check.py files/returns-october.xml --today 2026-11-03"
+    },
+    {
+      "id": "F2",
+      "group": "file",
+      "question": "Today is 2026-11-03. My bank sent me this file with my returned direct debits:\n\nReference;Collection date;Amount;Reason code;Reason\nORDER-2001;28.10.2026;39,00 EUR;AM04;Insufficient funds\nORDER-2002;28.10.2026;59,00 EUR;MD06;Refund request by customer\nORDER-2003;29.10.2026;1.239,00 EUR;MD07;Customer deceased\nORDER-2004;29.10.2026;39,00 EUR;SL01;Specific service offered by the customer's bank\nORDER-2005;30.10.2026;19,90 EUR;AB05;Timeout at the creditor's bank\n\nWhat should I collect again and when, what do I need to talk to the customer about first, and what do I stop? Add up what came back.",
+      "armBSuffix": "(The same file is saved in this folder as files/returns-october.csv.)",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Counts 5 returned debits totalling 1,395.90 euros.",
+          "type": "file"
+        },
+        {
+          "n": 2,
+          "text": "Says the AM04 debit (ORDER-2001, 39.00) can be collected again, earliest 2026-11-17.",
+          "type": "default"
+        },
+        {
+          "n": 3,
+          "text": "Says MD07 (1,239.00) is a stop and close the agreement, and MD06 (59.00) and SL01 (39.00) need a talk with the customer first, no automatic retry.",
+          "type": "default"
+        },
+        {
+          "n": 4,
+          "text": "Says AB05 is not one of the 25 codes in the guidance and sends the merchant to the bank or provider rather than giving a collect-again rule for it as known.",
+          "type": "scheme"
+        }
+      ],
+      "wrong": [
+        "Gets the total wrong (for example reads 1.239,00 as 1.239).",
+        "Says to retry MD07, MD06 or SL01 automatically."
+      ],
+      "keySource": "returns_check.py files/returns-october.csv --today 2026-11-03"
+    },
+    {
+      "id": "F3",
+      "group": "file",
+      "question": "Today is 2026-11-04. My bank sent me this file with my returned direct debits:\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:camt.054.001.02\">\n  <BkToCstmrDbtCdtNtfctn>\n    <GrpHdr><MsgId>NTF-EVAL-1</MsgId><CreDtTm>2026-11-04T07:30:00</CreDtTm></GrpHdr>\n    <Ntfctn>\n      <Id>NTF-EVAL-1-1</Id>\n      <Ntry>\n        <Amt Ccy=\"EUR\">49.90</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-03</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>SUB-7001</EndToEndId></Refs>\n          <RtrInf><Rsn><Cd>AM04</Cd></Rsn></RtrInf>\n        </TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">120.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-03</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>SUB-7002</EndToEndId></Refs>\n          <RtrInf><Rsn><Cd>AM04</Cd></Rsn></RtrInf>\n        </TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">30.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-04</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>SUB-7003</EndToEndId></Refs>\n          <RtrInf><Rsn><Cd>ED05</Cd></Rsn></RtrInf>\n        </TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">75.50</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-04</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>SUB-7004</EndToEndId></Refs>\n          <RtrInf><Rsn><Cd>AC01</Cd></Rsn></RtrInf>\n        </TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">29.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-04</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>SUB-7005</EndToEndId></Refs>\n          <RtrInf><Rsn><Cd>MD06</Cd></Rsn></RtrInf>\n        </TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">19.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-04</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>SUB-7006</EndToEndId></Refs>\n          <RtrInf><Rsn><Cd>MS03</Cd></Rsn></RtrInf>\n        </TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">250.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-04</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>PAYOUT-0042</EndToEndId></Refs>\n        </TxDtls></NtryDtls>\n      </Ntry>\n    </Ntfctn>\n  </BkToCstmrDbtCdtNtfctn>\n</Document>\n\nWhich of these should I collect again, on what date, and which ones need something done first? Give me the totals too.",
+      "armBSuffix": "(The same file is saved in this folder as files/returns-camt054-november.xml.)",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Counts 6 returned debits totalling 323.40 euros; the 250.00 payout entry (PAYOUT-0042) is not a return.",
+          "type": "file"
+        },
+        {
+          "n": 2,
+          "text": "Says three debits can be collected again (AM04 SUB-7001 49.90 and SUB-7002 120.00, ED05 SUB-7003 30.00; 199.90 together), earliest 2026-11-18, assuming a new advance notice sent today.",
+          "type": "default"
+        },
+        {
+          "n": 3,
+          "text": "Says AC01 (SUB-7004, 75.50) is not collected until the IBAN is corrected.",
+          "type": "default"
+        },
+        {
+          "n": 4,
+          "text": "Says MD06 (SUB-7005) and MS03 (SUB-7006) are not retried automatically: talk to the customer, or ask the customer or provider which reason applies.",
+          "type": "default"
+        }
+      ],
+      "wrong": [
+        "Counts the 250.00 payout as a return.",
+        "Gives a retry date before 2026-11-18.",
+        "Says to retry AC01, MD06 or MS03 as they are."
+      ],
+      "keySource": "returns_check.py files/returns-camt054-november.xml --today 2026-11-04"
+    },
+    {
+      "id": "F4",
+      "group": "file",
+      "question": "Today is 2026-11-12. My bank sent me this file with my returned direct debits:\n\nKunde;Mandatsinhaber;Mandatsreferenz;Faelligkeit;Betrag;Rueckgabegrund;Anmerkung\nAnna Beispiel;Anna Beispiel;MND-0001;03.11.2026;1.249,00 EUR;AM04;Konto nicht gedeckt\nBernd Muster;Bernd Muster GmbH;MND-0002;03.11.2026;89,5 EUR;md06;Kunde hat widersprochen\nCarla Test;Carla Test;MND-0003;04.11.2026;12,00;MD01;\nDieter Probe;Dieter Probe;MND-0004;04.11.2026;2.500,75 EUR;MS03;ohne Angabe\nEva Fiktiv;Eva Fiktiv;MND-0005;04.11.2026;39,90 EUR;AC04;\nFritz Demo;Fritz Demo;MND-0006;05.11.2026;1.089,10 EUR;XX99;unbekannt\nGerda Muster;Gerda Muster;MND-0007;05.11.2026;24,00 EUR;SL01;\nHans Beispiel;Hans Beispiel;MND-0008;05.11.2026;310,00 EUR;;bezahlt\n\nWhat do I collect again and when, and what needs a talk, a fix or a stop? How much money is that in all?",
+      "armBSuffix": "(The same file is saved in this folder as files/mahnungen-nov.csv.)",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Counts 7 returned debits totalling 5,004.25 euros (the last row with no reason code is not a return) and reads the European numbers right (1.249,00 is 1,249.00).",
+          "type": "file"
+        },
+        {
+          "n": 2,
+          "text": "Says only the AM04 debit (MND-0001, 1,249.00) can be collected again, earliest 2026-11-26, assuming a new advance notice sent today.",
+          "type": "default"
+        },
+        {
+          "n": 3,
+          "text": "Says MD01 (12.00) is a stop, AC04 (39.90) needs a new account, and MD06 (89.50), MS03 (2,500.75) and SL01 (24.00) need a talk or a question to the customer or provider first.",
+          "type": "default"
+        },
+        {
+          "n": 4,
+          "text": "Says XX99 (1,089.10) is not one of the 25 codes in the guidance and does not state a meaning for it; sends the merchant to the bank or provider.",
+          "type": "scheme"
+        }
+      ],
+      "wrong": [
+        "Gets an amount wrong because of the European number format.",
+        "Counts the row with an empty reason code as a return.",
+        "States a meaning for XX99."
+      ],
+      "keySource": "returns_check.py files/mahnungen-nov.csv --today 2026-11-12"
+    },
+    {
+      "id": "F5",
+      "group": "file",
+      "question": "Today is 2026-11-03. My bank sent me this file with my returned direct debits:\n\nReference;Collection date;Amount;Reason code;Reason\nORDER-2001;28.10.2026;39,00 EUR;AM04;Insufficient funds\nORDER-2002;28.10.2026;59,00 EUR;MD06;Refund request by customer\nORDER-2003;29.10.2026;1.239,00 EUR;MD07;Customer deceased\nORDER-2004;29.10.2026;39,00 EUR;SL01;Specific service offered by the customer's bank\nORDER-2005;30.10.2026;19,90 EUR;AB05;Timeout at the creditor's bank\n\nMy provider charges me 0.35 euros for each failed debit and 5 euros for each refund claim. What did these returns cost me in fees, and how much money did I not collect?",
+      "armBSuffix": "(The same file is saved in this folder as files/returns-october.csv.)",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says 5 debits came back and 1,395.90 euros was not collected.",
+          "type": "file"
+        },
+        {
+          "n": 2,
+          "text": "Gives the fees as 6.05 euros: 3 failed debits (AM04, MD07, SL01) at 0.35 plus 1 refund claim (MD06) at 5.00; the AB05 debit carries no fee because its code is outside the 25.",
+          "type": "file"
+        },
+        {
+          "n": 3,
+          "text": "Reports the money not collected and the fees as two separate figures, not added into one sum.",
+          "type": "file"
+        },
+        {
+          "n": 4,
+          "text": "Says AB05 is not one of the 25 codes in the guidance, so it is not counted as a failed debit with a fee.",
+          "type": "scheme"
+        }
+      ],
+      "wrong": [
+        "Adds the fees and the uncollected amount into one figure.",
+        "Gives a fee total other than 6.05 (for example 7.40 by counting AB05 as a failed debit)."
+      ],
+      "keySource": "returns_check.py files/returns-october.csv --today 2026-11-03 --fee-failed 0.35 --fee-refund 5"
+    },
+    {
+      "id": "F6",
+      "group": "file",
+      "question": "Today is 2026-11-04. My bank sent me this file with my returned direct debits:\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:camt.054.001.02\">\n  <BkToCstmrDbtCdtNtfctn>\n    <GrpHdr><MsgId>NTF-EVAL-1</MsgId><CreDtTm>2026-11-04T07:30:00</CreDtTm></GrpHdr>\n    <Ntfctn>\n      <Id>NTF-EVAL-1-1</Id>\n      <Ntry>\n        <Amt Ccy=\"EUR\">49.90</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-03</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>SUB-7001</EndToEndId></Refs>\n          <RtrInf><Rsn><Cd>AM04</Cd></Rsn></RtrInf>\n        </TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">120.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-03</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>SUB-7002</EndToEndId></Refs>\n          <RtrInf><Rsn><Cd>AM04</Cd></Rsn></RtrInf>\n        </TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">30.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-04</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>SUB-7003</EndToEndId></Refs>\n          <RtrInf><Rsn><Cd>ED05</Cd></Rsn></RtrInf>\n        </TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">75.50</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-04</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>SUB-7004</EndToEndId></Refs>\n          <RtrInf><Rsn><Cd>AC01</Cd></Rsn></RtrInf>\n        </TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">29.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-04</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>SUB-7005</EndToEndId></Refs>\n          <RtrInf><Rsn><Cd>MD06</Cd></Rsn></RtrInf>\n        </TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">19.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-04</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>SUB-7006</EndToEndId></Refs>\n          <RtrInf><Rsn><Cd>MS03</Cd></Rsn></RtrInf>\n        </TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">250.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-04</Dt></BookgDt>\n        <NtryDtls><TxDtls>\n          <Refs><EndToEndId>PAYOUT-0042</EndToEndId></Refs>\n        </TxDtls></NtryDtls>\n      </Ntry>\n    </Ntfctn>\n  </BkToCstmrDbtCdtNtfctn>\n</Document>\n\nI collect through Mollie. Which of these might Mollie already be retrying or cancelling on its own, and what should I do myself?",
+      "armBSuffix": "(The same file is saved in this folder as files/returns-camt054-november.xml.)",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says that for AM04, Mollie may retry subscriptions (up to 5 times, once daily, depending on the failure reason) and the merchant should check the provider's schedule before adding an own attempt.",
+          "type": "provider"
+        },
+        {
+          "n": 2,
+          "text": "Says that after AC01 Mollie may cancel the subscription at once, so the IBAN must be corrected.",
+          "type": "provider"
+        },
+        {
+          "n": 3,
+          "text": "Says that Mollie may cancel the subscription after 3 failures with MS03, and after 3 MD06 failures.",
+          "type": "provider"
+        },
+        {
+          "n": 4,
+          "text": "Says the merchant still talks to the customer for MD06 and asks first for MS03.",
+          "type": "default"
+        }
+      ],
+      "wrong": [
+        "States that Mollie retries or cancels for ED05 (the data has no Mollie note for ED05).",
+        "Gives Mollie behaviour the data does not state, as fact."
+      ],
+      "keySource": "data/codes.json collectAgainDetail and description texts naming Mollie, for the codes in files/returns-camt054-november.xml"
+    },
+    {
+      "id": "T1",
+      "group": "trap",
+      "question": "My bank sent back a debit with the code AB05. What does AB05 mean and when can I debit again?",
+      "armBSuffix": "",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says AB05 is not one of the 25 SEPA Direct Debit reason codes covered (or that it cannot confirm it from this guidance).",
+          "type": "scheme"
+        },
+        {
+          "n": 2,
+          "text": "Does not state a meaning or a collect-again rule for AB05 as known fact.",
+          "type": "scheme"
+        },
+        {
+          "n": 3,
+          "text": "Sends the merchant to their bank or payment provider for the meaning.",
+          "type": "scheme"
+        }
+      ],
+      "wrong": [
+        "States a meaning for AB05 as fact.",
+        "Gives a retry date or retry rule for AB05."
+      ],
+      "keySource": "returns_check.py --code AB05 (exit 2: not one of the 25 reason codes in the EPC guidance)"
+    },
+    {
+      "id": "T2",
+      "group": "trap",
+      "question": "A debit came back with MS03. Can I just retry it next week?",
+      "armBSuffix": "",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says no: do not retry blind; first ask the customer or provider which reason applies.",
+          "type": "default"
+        },
+        {
+          "n": 2,
+          "text": "Says MS03 can stand in for another code (AC04, AM04, MD07, RR01 to RR04), for example a closed account, insufficient funds or a death.",
+          "type": "scheme"
+        },
+        {
+          "n": 3,
+          "text": "Says that even if you retry, the default is one retry, no sooner than 7 days, and with a Core pre-notification of at least 14 calendar days unless agreed otherwise, so next week is too early.",
+          "type": "default"
+        }
+      ],
+      "wrong": [
+        "Says yes, retry next week.",
+        "Gives a retry date next week."
+      ],
+      "keySource": "returns_check.py --code MS03 (data/codes.json)"
+    },
+    {
+      "id": "T3",
+      "group": "trap",
+      "question": "A customer got a refund on their last payment, the reason on the bank file is MD06. Can I charge them again right away?",
+      "armBSuffix": "",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says no automatic retry; talk to the customer first (Waverunner recommends no automatic retry).",
+          "type": "default"
+        },
+        {
+          "n": 2,
+          "text": "Says the refund may be the customer's unconditional refund right, or the debit may not have matched the amount in the pre-notification; a refund request alone does not mean the merchant made a mistake.",
+          "type": "scheme"
+        },
+        {
+          "n": 3,
+          "text": "Says MD06 is a refund claim and applies to Core debits only.",
+          "type": "scheme"
+        }
+      ],
+      "wrong": [
+        "Says yes, charge again right away.",
+        "Says the refund proves the merchant erred or the customer cheated."
+      ],
+      "keySource": "returns_check.py --code MD06 (data/codes.json)"
+    },
+    {
+      "id": "T4",
+      "group": "trap",
+      "question": "Today is Saturday 2026-11-07 and I am sending the customer a new advance notice today. A 45 euro AM04 debit from 2 November 2026 came back. What is the earliest date I can collect again?",
+      "armBSuffix": "",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Gives 2026-11-23 (Monday) as the earliest date.",
+          "type": "default"
+        },
+        {
+          "n": 2,
+          "text": "Does not give Saturday 2026-11-21 as the date (it is a weekend day).",
+          "type": "default"
+        },
+        {
+          "n": 3,
+          "text": "States the assumption: a Core advance notice of 14 calendar days from today, unless a different period was agreed with the customer.",
+          "type": "scheme"
+        }
+      ],
+      "wrong": [
+        "Gives 2026-11-21 as the collection date.",
+        "Gives a date earlier than 2026-11-21."
+      ],
+      "keySource": "returns_check.py files/weekend-one-row.csv --today 2026-11-07 gives retryOn 2026-11-23"
+    },
+    {
+      "id": "T5",
+      "group": "trap",
+      "question": "What is the maximum number of times the SEPA scheme lets me re-present a failed AM04 debit, and how long must I wait between tries?",
+      "armBSuffix": "",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says the scheme (EPC) sets no retry rule; any limit or wait is a default or a provider setting.",
+          "type": "scheme"
+        },
+        {
+          "n": 2,
+          "text": "Gives the Waverunner default as a default: at most 2 new attempts, each at least 5 days after the pre-notification with the new date.",
+          "type": "default"
+        },
+        {
+          "n": 3,
+          "text": "Mentions the Core advance notice of at least 14 calendar days before collection unless a different period was agreed.",
+          "type": "scheme"
+        },
+        {
+          "n": 4,
+          "text": "Says provider schedules differ (Stripe at most twice within 30 days if enabled; Mollie up to 5 times, once daily) and to check the provider's schedule.",
+          "type": "provider"
+        }
+      ],
+      "wrong": [
+        "States a retry limit or waiting period as a SEPA scheme or EPC rule."
+      ],
+      "keySource": "data/codes.json AM04 collectAgainDetail and returns_check.py output field source.defaults"
+    },
+    {
+      "id": "T6",
+      "group": "trap",
+      "question": "Today is 2026-11-05. Here is my bank statement for this week:\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Document xmlns=\"urn:iso:std:iso:20022:tech:xsd:camt.053.001.02\">\n  <BkToCstmrStmt>\n    <GrpHdr><MsgId>STMT-EVAL-1</MsgId><CreDtTm>2026-11-05T06:00:00</CreDtTm></GrpHdr>\n    <Stmt>\n      <Id>STMT-EVAL-1-1</Id>\n      <Ntry>\n        <Amt Ccy=\"EUR\">39.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-03</Dt></BookgDt>\n        <NtryDtls><TxDtls><Refs><EndToEndId>ORDER-3001</EndToEndId></Refs></TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">59.00</Amt><CdtDbtInd>CRDT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-03</Dt></BookgDt>\n        <NtryDtls><TxDtls><Refs><EndToEndId>ORDER-3002</EndToEndId></Refs></TxDtls></NtryDtls>\n      </Ntry>\n      <Ntry>\n        <Amt Ccy=\"EUR\">14.50</Amt><CdtDbtInd>DBIT</CdtDbtInd><Sts>BOOK</Sts>\n        <BookgDt><Dt>2026-11-04</Dt></BookgDt>\n        <NtryDtls><TxDtls><Refs><EndToEndId>FEE-NOV</EndToEndId></Refs></TxDtls></NtryDtls>\n      </Ntry>\n    </Stmt>\n  </BkToCstmrStmt>\n</Document>\n\nWhich returned debits should I collect again, and when?",
+      "armBSuffix": "(The same file is saved in this folder as files/statement-camt053-no-returns.xml.)",
+      "keyPoints": [
+        {
+          "n": 1,
+          "text": "Says there are no returned or rejected debits (no reason codes) in this file.",
+          "type": "file"
+        },
+        {
+          "n": 2,
+          "text": "Does not invent returned debits and does not recommend collecting again any of the three entries.",
+          "type": "file"
+        },
+        {
+          "n": 3,
+          "text": "Says what is missing: a return file or statement with reason codes for returned debits.",
+          "type": "file"
+        }
+      ],
+      "wrong": [
+        "Lists any entry of the file as a returned debit to collect again.",
+        "Invents a reason code for an entry."
+      ],
+      "keySource": "returns_check.py files/statement-camt053-no-returns.xml (exit 2: no returned or rejected debits with a reason code)"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+arm,id,group,blind_id,points_met,points_possible,point_flags,wrong_flag,invented_flag,note
+A,F1,file,R37,4,4,1111,0,1,bank cut-off 1 business day; try once only
+B,F1,file,R33,4,4,1111,0,0,
+A,F2,file,R18,2,4,1010,0,1,"AM04 retry 'around 10 Nov' (key 2026-11-17); AB05 timeout, collect again now; 8 weeks / 13 months; estate claim"
+B,F2,file,R36,4,4,1111,0,0,
+A,F3,file,R34,3,4,1011,1,1,AM04 earliest due date 2026-11-05 (key 2026-11-18); 8 weeks; D-1
+B,F3,file,R17,4,4,1111,0,0,
+A,F4,file,R40,4,4,1111,0,0,repeats customer names from the file
+B,F4,file,R35,4,4,1111,0,0,
+A,F5,file,R12,1,4,1000,1,1,"fees 6.75 not 6.05; adds fees to uncollected (1,402.65); AB05 given a meaning and retry advice"
+B,F5,file,R23,4,4,1111,0,0,
+A,F6,file,R10,2,4,0101,1,1,"says Mollie has no same-cycle retry for AM04 (key: may retry up to 5 times daily); chargeback, 8 weeks, tr_ ids"
+B,F6,file,R05,4,4,1111,0,0,ignored the stated today (used 24 Nov) but flagged the alternative date
+A,S1,single,R39,2,4,1001,1,1,says SEPA rules limit re-presenting (one retry); says fault generally not the merchant's
+B,S1,single,R13,4,4,1111,0,0,
+A,S2,single,R21,3,3,111,0,1,"13 months, 36 months, sequence type"
+B,S2,single,R15,3,3,111,0,0,
+A,S3,single,R38,3,3,111,0,1,"8 weeks / 13 months, refund final and cannot be contested"
+B,S3,single,R07,3,3,111,0,0,
+A,S4,single,R03,3,4,1110,0,1,says a return generally cannot be resubmitted as is; no 7 day / 14 day rule
+B,S4,single,R25,4,4,1111,0,0,
+A,S5,single,R20,3,3,111,0,1,"1 business day lead time for Core, amendment indicator"
+B,S5,single,R31,3,3,111,0,0,
+A,S6,single,R06,2,3,110,0,1,"claim against the estate, 14 months retention; never says no party at fault"
+B,S6,single,R26,3,3,111,0,0,
+A,S7,single,R02,3,3,111,0,0,
+B,S7,single,R30,3,3,111,0,0,
+A,S8,single,R28,1,3,100,0,1,"says cause is on your bank's or the CSM's side (key: the customer's bank); no one-retry default, no 14 day notice; D-1"
+B,S8,single,R32,3,3,111,0,0,
+A,T1,trap,R19,0,3,000,1,1,"states AB05 = timeout creditor agent, retry right away, D-1 and 36 month rules"
+B,T1,trap,R08,3,3,111,0,0,
+A,T2,trap,R04,2,3,110,0,1,8 weeks refund claim; no default retry rule
+B,T2,trap,R09,3,3,111,0,0,
+A,T3,trap,R01,2,3,110,0,1,8 weeks / 13 months stated; MD06 Core-only not said
+B,T3,trap,R11,3,3,111,0,0,
+A,T4,trap,R22,3,3,111,0,1,"D-1 submission deadline, TARGET day"
+B,T4,trap,R27,3,3,111,0,0,
+A,T5,trap,R29,3,4,1011,0,1,"scheme sets no limit (correct, from memory); no Waverunner default; 36 months, 1 business day, 5 business days, 8 weeks; p4 given for gist only (bank or clearing house may cap)"
+B,T5,trap,R24,4,4,1111,0,0,
+A,T6,trap,R14,3,3,111,0,0,
+B,T6,trap,R16,3,3,111,0,0,
