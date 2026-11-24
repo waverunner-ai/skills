@@ -6,7 +6,7 @@ and CSV or TSV exports from a bank or payment provider.
 
 Four things are read per returned debit: the reason code, the amount, a date and the debit's own
 reference (end-to-end ID, else mandate ID). The name and account fields are not read, and a
-reference that holds an account number is dropped. A reference is whatever the merchant put in it:
+reference that holds an IBAN is dropped. A reference is whatever the merchant put in it:
 if that is a customer's name, it shows, unless --no-references is given. The script uses the Python
 standard library and opens no network connection.
 
@@ -87,7 +87,7 @@ def load_codes() -> tuple[dict, dict]:
 
 def money(n: float) -> float:
     """Rounds to cents, half up (10.125 becomes 10.13)."""
-    return math.floor(n * 100 + 0.5) / 100
+    return math.floor(n * 100 + 0.5) / 100 if math.isfinite(n) and abs(n) < 1e15 else 0.0
 
 
 # --- XML -------------------------------------------------------------------------------------------
@@ -118,7 +118,7 @@ def text(el) -> str:
 
 def xml_amount(el) -> float:
     value = text(el)
-    return float(value) if PLAIN_NUMBER.match(value) else 0.0
+    return money(float(value)) if PLAIN_NUMBER.match(value) else 0.0
 
 
 def real_day(iso: str):
@@ -135,7 +135,7 @@ def iso_day(value: str):
 
 
 def clean_ref(value: str):
-    """A debit's own reference. Placeholders and anything that holds an account number are left out."""
+    """A debit's own reference. Placeholders and anything that holds an IBAN are left out."""
     v = value.strip()
     if not v or v.upper() == "NOTPROVIDED" or holds_iban(v):
         return None
@@ -210,7 +210,7 @@ def parse_amount(raw: str) -> float:
     else:
         s = s.replace(",", "")
     try:
-        return abs(float(s))
+        return money(abs(float(s)))
     except ValueError:
         return 0.0
 
@@ -529,4 +529,8 @@ def main(argv=None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except Exception as exc:  # a file this script did not expect: say so in the same shape as any other refusal
+        print(json.dumps({"error": f"This file could not be read ({type(exc).__name__}). Export it again and try once more."}))
+        sys.exit(2)

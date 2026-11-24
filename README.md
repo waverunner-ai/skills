@@ -1,7 +1,7 @@
 # Payments skills
 
-Skills for people who run online shops and subscriptions, for use with Claude, ChatGPT, Codex and other assistants
-that read the open skill format. A skill is a folder of instructions and data that an assistant loads when your
+Skills for people who run online shops and subscriptions, for use with Claude and other assistants that read the
+open skill format. A skill is a folder of instructions and data that an assistant loads when your
 question fits it.
 
 Each skill here does one payments job in full, with no account, no API key and no email. The scripts run on your
@@ -39,7 +39,7 @@ provider.
 ### What it reads, and what it does not
 
 The script takes four things per returned debit: the reason code, the amount, a date and the debit's own reference.
-It does not read the name or account fields, it drops a reference that holds an account number, and it opens no
+It does not read the name or account fields, it drops a reference that holds an IBAN, and it opens no
 network connection. You can check all three in
 [returns_check.py](skills/sepa-returns-check/scripts/returns_check.py): one file, standard library only.
 

@@ -145,6 +145,13 @@ class Files(unittest.TestCase):
         out = rc.summarise([{"code": "AM04", "amount": 1}] * 3, KNOWN, "2026-11-03", 3.333, 15, False)
         self.assertEqual(out["fees"], 9.99)
 
+    def test_an_absurd_amount_counts_as_zero(self):
+        big = "9" * 400
+        _, rows = rc.parse_return_file("Ref;Amount;Code" + chr(10) + "A;" + big + ";AM04" + chr(10), KNOWN)
+        self.assertEqual(rows[0]["amount"], 0.0)
+        _, rows = rc.parse_return_file(PAIN002.replace("40.00", big), KNOWN)
+        self.assertEqual(rows[0]["amount"], 0.0)
+
     def test_amounts(self):
         for raw, want in {"1.234,56": 1234.56, "1,234.56": 1234.56, "-12,50 EUR": 12.5, "12.5": 12.5, "": 0.0}.items():
             self.assertEqual(rc.parse_amount(raw), want)
