@@ -1,6 +1,6 @@
 ---
 name: chargeback-ratio-check
-description: Works out a card chargeback ratio from two numbers, this month's chargebacks and last month's transactions, the way Mastercard counts it, and sets it beside the published Visa, Mastercard and MATCH thresholds, each of which is a ratio and a minimum count, with the source and date behind each one. Use when a shop owner asks what their chargeback ratio is, which month's sales to divide by, whether a ratio such as 1.6% puts them over Visa's or Mastercard's line, what ECM, HECM, VAMP or MATCH mean, whether a dispute they won still counts, or what to ask their payment provider after a chargeback warning, a monitoring fee or a closure notice.
+description: Works out a card chargeback ratio from two numbers, this month's chargebacks and last month's transactions, the way Mastercard counts it, and sets it beside the published Visa, Mastercard and MATCH thresholds, each of which is a ratio and a minimum count, with the source and date behind each one. Use when a shop owner asks what their chargeback ratio is, which month's sales to divide by, whether a ratio such as 1.6% or 160 basis points puts them over Visa's or Mastercard's line, what a ratio quoted in an email or a dashboard from their provider means, what ECM, HECM, VAMP or MATCH mean, whether a dispute they won still counts, or what to ask their payment provider after a chargeback warning, a monitoring fee or a closure notice.
 license: MIT
 ---
 
@@ -122,7 +122,9 @@ One JSON object:
 - **Every line is a ratio and a minimum.** Never give a ratio line without its minimum count or amount. A small
   account can pass a ratio and still miss the minimum; say both.
 - **Visa is not chargebacks alone.** Visa's ratio counts card-not-present fraud reports plus disputes over settled
-  transactions, so this script does not compute it. Give Visa's published line and send the merchant to the provider
+  transactions, so it cannot be worked out from chargebacks and sales alone. Say that to the merchant in those terms,
+  not as something a script lacks. If the merchant gives fraud reports and settled transactions and you do the sum
+  yourself, label it as your own arithmetic, not a figure from this skill. Give Visa's published line and send the merchant to the provider
   for their VAMP ratio and their acquirer's Visa level. Visa's merchant test applies only while the acquirer is below
   both acquirer levels.
 - **Which month.** For Mastercard, this month's chargebacks over last month's transactions: a July ratio uses June's

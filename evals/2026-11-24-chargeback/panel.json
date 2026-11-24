@@ -1,0 +1,710 @@
+{
+  "today": "2026-11-24",
+  "skill": "chargeback-ratio-check",
+  "note": "Key written from the waverunner-website source files named in each ref, not from any skill or from memory. Shape follows evals/2026-11-24/panel.json with the brief's field names (key_points, wrong_if, working, key_source). 'scope: extension' questions need the optional fraud-report and fee extensions.",
+  "types": {
+    "scheme": "card-network or scheme fact as the site states it",
+    "provider": "a named provider's rule or a secondary source as the site states it",
+    "arithmetic": "computed from the TS source",
+    "site-advice": "the guide's own advice, not a scheme rule"
+  },
+  "questions": [
+    {
+      "id": "P1",
+      "group": "plain",
+      "scope": "core",
+      "question": "Is there one chargeback percentage that gets a shop's payment account shut down? Everyone on the forums says 1%.",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "No chargeback ratio is a universal shutdown line.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:7"
+        },
+        {
+          "n": 2,
+          "text": "Shopify can decline, deactivate or restrict an account before any network threshold, so a low ratio does not rule out action.",
+          "type": "provider",
+          "ref": "src/content/guides/chargeback-ratio.mdx:7-8; src/content/guides/chargeback-ratio.mdx:117-121; src/content/guides/payout-holds.mdx:392"
+        },
+        {
+          "n": 3,
+          "text": "Card-network programmes use a ratio AND a minimum count or amount, not a ratio alone.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:112-114; src/content/guides/chargeback-ratio.mdx:184"
+        },
+        {
+          "n": 4,
+          "text": "Ask your provider which test applies to you and how it counted your ratio.",
+          "type": "site-advice",
+          "ref": "src/components/content/blocks/ChargebackRatioCalculator.tsx:45; src/content/guides/chargeback-ratio.mdx:103"
+        }
+      ],
+      "wrong_if": [
+        "States a single percentage (1%, 0.9%, 0.75%, 2%) as the universal shutdown or monitoring line.",
+        "Says that staying under 1% means the account is safe."
+      ],
+      "key_source": [
+        "src/components/content/blocks/ChargebackRatioCalculator.tsx",
+        "src/content/guides/chargeback-ratio.mdx"
+      ]
+    },
+    {
+      "id": "P2",
+      "group": "plain",
+      "scope": "core",
+      "question": "What exactly is my chargeback ratio, and is it worked out the same way at Visa and at Mastercard?",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "Mastercard-style count: this month's chargebacks divided by the previous month's transactions (a July ratio uses June's transactions).",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:164; src/lib/calculators/chargeback-ratio.ts:6-10"
+        },
+        {
+          "n": 2,
+          "text": "Mastercard divides by the number of transactions, not by sales revenue.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:183"
+        },
+        {
+          "n": 3,
+          "text": "Visa's merchant test (VAMP) is not the same: it divides card-not-present fraud reports plus disputes by settled transactions, so it counts more than chargebacks.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:90; src/content/guides/chargeback-ratio.mdx:166"
+        },
+        {
+          "n": 4,
+          "text": "The rate on a provider dashboard may use different months, so check with the provider which months its count used.",
+          "type": "provider",
+          "ref": "src/content/guides/chargeback-ratio.mdx:186"
+        }
+      ],
+      "wrong_if": [
+        "Says Visa and Mastercard use the same formula.",
+        "Says Mastercard divides by sales revenue.",
+        "Says the Visa ratio counts chargebacks only."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx"
+      ]
+    },
+    {
+      "id": "P3",
+      "group": "plain",
+      "scope": "core",
+      "question": "My processor's email says my ratio is 150 basis points. What is a basis point, and what is that as a percentage?",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "1 basis point is 0.01%.",
+          "type": "arithmetic",
+          "ref": "src/components/content/blocks/ChargebackRatioCalculator.tsx:89"
+        },
+        {
+          "n": 2,
+          "text": "150 bps is 1.5%.",
+          "type": "arithmetic",
+          "ref": "src/content/guides/chargeback-ratio.mdx:87-88; src/lib/calculators/chargeback-ratio.ts:53"
+        }
+      ],
+      "wrong_if": [
+        "Says 1 basis point is 0.1% or 1%.",
+        "Says 150 bps is 15% or 0.15%."
+      ],
+      "key_source": [
+        "src/components/content/blocks/ChargebackRatioCalculator.tsx",
+        "src/content/guides/chargeback-ratio.mdx"
+      ]
+    },
+    {
+      "id": "P4",
+      "group": "plain",
+      "scope": "core",
+      "question": "I win most of my disputes. Do the ones I win get taken out of my ratio?",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "No. A dispute you win still counts in the monitoring totals.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:190-192; src/content/guides/payout-holds.mdx:398"
+        },
+        {
+          "n": 2,
+          "text": "Disputes settled through Rapid Dispute Resolution (RDR) stay out of the VAMP ratio, depending on when the data is pulled; ask the provider whether it offers RDR.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:194-195"
+        },
+        {
+          "n": 3,
+          "text": "A fraud report (TC40) counts in the VAMP ratio even when no dispute follows, unless it qualifies for Visa's Compelling Evidence 3.0 exclusion.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:197-199"
+        }
+      ],
+      "wrong_if": [
+        "Says won disputes do not count towards the ratio.",
+        "Says a refund before the dispute removes it from the ratio (the site does not say this)."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx"
+      ]
+    },
+    {
+      "id": "P5",
+      "group": "plain",
+      "scope": "core",
+      "question": "What is MATCH? My payment account was frozen last week. Am I on it now?",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "MATCH is Mastercard's list of terminated merchants (MATCH Pro in the high-risk guide).",
+          "type": "scheme",
+          "ref": "src/content/guides/payment-account-frozen.mdx:247; src/content/guides/high-risk-merchant-account.mdx:231"
+        },
+        {
+          "n": 2,
+          "text": "A frozen account does not have to be reported to MATCH. A report is required only when the provider closes the account and the closure meets one of Mastercard's MATCH reason codes.",
+          "type": "scheme",
+          "ref": "src/content/guides/payment-account-frozen.mdx:247"
+        },
+        {
+          "n": 3,
+          "text": "Ask the provider whether it reported the closure and under which reason code.",
+          "type": "site-advice",
+          "ref": "src/content/guides/payment-account-frozen.mdx:249"
+        }
+      ],
+      "wrong_if": [
+        "Says a freeze automatically puts you on MATCH.",
+        "Says MATCH is Visa's list."
+      ],
+      "key_source": [
+        "src/content/guides/payment-account-frozen.mdx"
+      ]
+    },
+    {
+      "id": "P6",
+      "group": "plain",
+      "scope": "core",
+      "question": "What is the difference between Mastercard's ECM and HECM, and what do I need to hit to be in them?",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "ECM (Excessive Chargeback Merchant): at least 150 bps AND at least 100 chargebacks in a month, per merchant ID.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:87; src/content/guides/chargeback-ratio.mdx:135-139"
+        },
+        {
+          "n": 2,
+          "text": "HECM (High Excessive Chargeback Merchant): at least 300 bps AND at least 300 chargebacks in a month.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:88; src/content/guides/chargeback-ratio.mdx:141-145"
+        },
+        {
+          "n": 3,
+          "text": "These two thresholds are cited to TabaPay, a payment processor, not to Mastercard's own rules; the answer should say so or tell the merchant to confirm with their provider.",
+          "type": "provider",
+          "ref": "src/content/guides/chargeback-ratio.mdx:35; src/content/guides/chargeback-ratio.mdx:153"
+        }
+      ],
+      "wrong_if": [
+        "Gives a ratio without the minimum chargeback count.",
+        "Says ECM starts at 1% or 100 bps, or HECM at 2%."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx"
+      ]
+    },
+    {
+      "id": "N1",
+      "group": "numbers",
+      "scope": "core",
+      "question": "This month I had 90 chargebacks. Last month I processed 6,000 card transactions. What is my ratio, and am I in Mastercard's excessive tier?",
+      "working": "90 / 6,000 = 0.015 -> 1.50% -> 0.015 x 10,000 = 150 bps. ECM: 150 >= 150 yes, 90 >= 100 no -> not both. The TSX default example is exactly these numbers.",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "Ratio is 1.50%, which is 150 bps.",
+          "type": "arithmetic",
+          "ref": "src/lib/calculators/chargeback-ratio.ts:47-54; src/lib/calculators/chargeback-ratio.test.ts:12-17"
+        },
+        {
+          "n": 2,
+          "text": "ECM needs both at least 150 bps AND at least 100 chargebacks; 150 bps meets the ratio condition but 90 chargebacks is below 100, so the ECM conditions are not both met.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:87; src/content/guides/chargeback-ratio.mdx:135-139"
+        },
+        {
+          "n": 3,
+          "text": "HECM (300 bps and 300 chargebacks) is not met.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:88"
+        },
+        {
+          "n": 4,
+          "text": "Say the provider confirms which test applies; this is an estimate.",
+          "type": "site-advice",
+          "ref": "src/components/content/blocks/ChargebackRatioCalculator.tsx:45"
+        }
+      ],
+      "wrong_if": [
+        "Says the merchant is in ECM because the ratio is 1.5%.",
+        "Says the merchant is safe or has nothing to worry about.",
+        "Divides by this month's transactions (the question gives only last month's)."
+      ],
+      "key_source": [
+        "src/components/content/blocks/ChargebackRatioCalculator.tsx",
+        "src/content/guides/chargeback-ratio.mdx",
+        "src/lib/calculators/chargeback-ratio.ts"
+      ]
+    },
+    {
+      "id": "N2",
+      "group": "numbers",
+      "scope": "core",
+      "question": "I had 1,500 chargebacks this month and 98,000 transactions last month. Ratio? Which Mastercard conditions does that meet?",
+      "working": "1,500 / 98,000 = 0.0153061 -> 1.53% (two decimals) -> x 10,000 = 153.06 -> '153.1 bps'. ECM: 153.1 >= 150 and 1,500 >= 100. HECM: 153.1 < 300.",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "Ratio is 1.53%, about 153 bps (153.1 bps to one decimal).",
+          "type": "arithmetic",
+          "ref": "src/lib/calculators/chargeback-ratio.ts:47-54; src/lib/calculators/chargeback-ratio.ts:64-67; src/content/guides/chargeback-ratio.mdx:165"
+        },
+        {
+          "n": 2,
+          "text": "Both ECM conditions are met (above 150 bps and above 100 chargebacks).",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:165; src/content/guides/chargeback-ratio.mdx:87"
+        },
+        {
+          "n": 3,
+          "text": "HECM is not met: the ratio is far below 300 bps even though the count is above 300.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:88"
+        },
+        {
+          "n": 4,
+          "text": "Visa's ratio also counts fraud reports, so get the VAMP ratio and the acquirer's Visa level from the provider.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:166"
+        }
+      ],
+      "wrong_if": [
+        "Says HECM is met because the count is above 300.",
+        "Rounds the ratio to 1.5% and says it is exactly at the limit."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx",
+        "src/lib/calculators/chargeback-ratio.ts"
+      ]
+    },
+    {
+      "id": "N3",
+      "group": "numbers",
+      "scope": "core",
+      "question": "310 chargebacks this month, 9,800 card transactions last month. Where does that put me with Mastercard?",
+      "working": "310 / 9,800 = 0.031633 -> 3.16% -> 316.33 -> '316.3 bps'. HECM: 316.3 >= 300 and 310 >= 300 -> met. ECM: 316.3 >= 150 and 310 >= 100 -> met.",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "Ratio is 3.16%, about 316 bps (316.3 bps).",
+          "type": "arithmetic",
+          "ref": "src/lib/calculators/chargeback-ratio.ts:47-54"
+        },
+        {
+          "n": 2,
+          "text": "Both HECM conditions are met (at least 300 bps and at least 300 chargebacks), and so are both ECM conditions.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:87-88; src/content/guides/chargeback-ratio.mdx:135-145"
+        },
+        {
+          "n": 3,
+          "text": "HECM assessments are larger than ECM from month 3; ECM has a remediation plan and assessments from month 2 (per TabaPay).",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:139; src/content/guides/chargeback-ratio.mdx:144"
+        }
+      ],
+      "wrong_if": [
+        "Says only ECM applies.",
+        "Gives a ratio below 3% or above 3.2%."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx",
+        "src/lib/calculators/chargeback-ratio.ts"
+      ]
+    },
+    {
+      "id": "N4",
+      "group": "numbers",
+      "scope": "core",
+      "question": "12 chargebacks this month and 4,000 transactions last month. What is my ratio, and does that mean I am fine?",
+      "working": "12 / 4,000 = 0.003 -> 0.30% -> 0.003 x 10,000 = 30 bps ('30 bps', no trailing .0).",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "Ratio is 0.30%, which is 30 bps.",
+          "type": "arithmetic",
+          "ref": "src/lib/calculators/chargeback-ratio.ts:47-54; src/lib/calculators/chargeback-ratio.ts:57-67"
+        },
+        {
+          "n": 2,
+          "text": "Below the ECM ratio condition (150 bps) and the ECM count (100).",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:87"
+        },
+        {
+          "n": 3,
+          "text": "A low ratio does not rule out provider action: Shopify can act on a higher-risk account before any network threshold, and the dashboard rate can differ from the network count.",
+          "type": "provider",
+          "ref": "src/content/guides/chargeback-ratio.mdx:110; src/content/guides/payout-holds.mdx:392; src/content/guides/chargeback-ratio.mdx:186-188"
+        }
+      ],
+      "wrong_if": [
+        "Says 'you are safe' or 'you cannot be shut down'.",
+        "Gives 0.3 bps or 3%."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx",
+        "src/lib/calculators/chargeback-ratio.ts"
+      ]
+    },
+    {
+      "id": "N5",
+      "group": "numbers",
+      "scope": "core",
+      "question": "I started selling this month and already have 5 chargebacks. Last month I had no transactions at all. What is my chargeback ratio?",
+      "working": "transactions = 0 -> ratio, percent and bps are null -> page prints 'Not available'.",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "There is no ratio to give: with zero transactions last month the calculation is 'not available', not 0%, not infinity.",
+          "type": "arithmetic",
+          "ref": "src/lib/calculators/chargeback-ratio.ts:49-51; src/components/content/blocks/ChargebackRatioCalculator.tsx:76-83"
+        },
+        {
+          "n": 2,
+          "text": "It needs last month's transaction count; the method divides by the previous month's transactions.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:164"
+        }
+      ],
+      "wrong_if": [
+        "Gives a number (0%, 100%, infinity) as the ratio.",
+        "Silently divides by this month's transactions and presents the result as the Mastercard ratio."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx",
+        "src/lib/calculators/chargeback-ratio.ts"
+      ]
+    },
+    {
+      "id": "N6",
+      "group": "numbers",
+      "scope": "core",
+      "question": "In November I had 45 chargebacks. In October I processed 2,500 card transactions, and in November so far 3,000. What is my November ratio?",
+      "working": "Prior-month rule: Nov chargebacks / Oct transactions = 45 / 2,500 = 0.018 = 1.80% = 180 bps. (Wrong method: 45 / 3,000 = 1.50% = 150 bps.) ECM count 45 < 100 -> not met.",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "Divide by October's transactions: 45 / 2,500 = 1.80%, which is 180 bps.",
+          "type": "arithmetic",
+          "ref": "src/content/guides/chargeback-ratio.mdx:164; src/lib/calculators/chargeback-ratio.ts:6-10"
+        },
+        {
+          "n": 2,
+          "text": "The ratio condition for ECM (150 bps) is met, but 45 chargebacks is below the 100 minimum, so ECM is not met.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:87"
+        }
+      ],
+      "wrong_if": [
+        "Divides by November's 3,000 (gives 1.50%).",
+        "Says ECM is met."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx"
+      ]
+    },
+    {
+      "id": "N7",
+      "group": "numbers",
+      "scope": "extension",
+      "question": "On Visa card-not-present payments last month I had 60 disputes and 50 fraud reports (TC40) across 5,000 settled transactions, shop based in the EU. What is my Visa ratio and am I in Visa's merchant programme?",
+      "working": "(60 + 50) / 5,000 = 0.022 = 2.20% = 220 bps. Count test: 110 < 1,500 -> merchant test not met.",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "Visa counts fraud reports plus disputes: (60 + 50) / 5,000 = 2.20%, which is 220 bps.",
+          "type": "arithmetic",
+          "ref": "src/content/guides/chargeback-ratio.mdx:90; src/content/guides/chargeback-ratio.mdx:166; src/content/guides/chargeback-ratio.mdx:197-199"
+        },
+        {
+          "n": 2,
+          "text": "In the EU the Visa merchant test needs at least 150 bps AND at least 1,500 such events a month (from 1 April 2026); 110 events is far below 1,500, so that test is not met.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:91; src/content/guides/chargeback-ratio.mdx:123-127"
+        },
+        {
+          "n": 3,
+          "text": "The merchant test applies only while the acquirer is below both Visa acquirer levels; ask the provider for the VAMP ratio and the acquirer's level.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:99; src/content/guides/chargeback-ratio.mdx:103; src/content/guides/chargeback-ratio.mdx:166"
+        }
+      ],
+      "wrong_if": [
+        "Says the 220 bps puts the merchant in Visa's excessive programme without the 1,500-event minimum.",
+        "Applies the CEMEA 220 bps test to an EU shop.",
+        "Counts only the 60 disputes (1.2%)."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx"
+      ],
+      "note": "Needs the skill extension for fraud reports; not in the site's tool. Drop if the extension is not built."
+    },
+    {
+      "id": "N8",
+      "group": "numbers",
+      "scope": "extension",
+      "question": "Braintree told me my acquirer is at Visa's Above Standard level and billed me 12 counts this month. What will that cost, and what do I need to check?",
+      "working": "12 x USD 4 = USD 48. (Excessive would be USD 8 per count: 12 x 8 = 96, not asked.)",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "The Braintree VAMP fee at Above Standard is USD 4 per count from 1 January 2026, so 12 counts x USD 4 = USD 48 if all 12 are billed.",
+          "type": "arithmetic",
+          "ref": "src/content/guides/chargeback-ratio.mdx:216"
+        },
+        {
+          "n": 2,
+          "text": "The fee is charged per count (per fraud report or dispute), not per percentage point, so the count is needed as well as the ratio.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:101; src/content/guides/chargeback-ratio.mdx:217"
+        },
+        {
+          "n": 3,
+          "text": "Braintree fines merchants whose own VAMP ratio is 50 bps or higher when the acquirer reaches either Visa level; ask for the itemised calculation (events billed, fee per event, data month, contract clause).",
+          "type": "provider",
+          "ref": "src/content/guides/chargeback-ratio.mdx:100; src/content/guides/chargeback-ratio.mdx:203-214"
+        }
+      ],
+      "wrong_if": [
+        "Quotes USD 8 per count for Above Standard.",
+        "Quotes USD 10 per dispute.",
+        "Gives a total from a percentage instead of the count."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx"
+      ],
+      "note": "Needs the skill extension for fees; not in the site's tool. Drop if the extension is not built."
+    },
+    {
+      "id": "S1",
+      "group": "scenario",
+      "scope": "core",
+      "question": "Stripe's dashboard says my dispute rate is 0.4% but they paused my payouts and want documents. Under 1% I thought I was fine. Why?",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "A provider's risk review is not a ratio test; there is no universal cutoff, and a provider can restrict an account before any network threshold.",
+          "type": "provider",
+          "ref": "src/content/guides/chargeback-ratio.mdx:7; src/content/guides/chargeback-ratio.mdx:117-121; src/content/guides/payout-holds.mdx:392"
+        },
+        {
+          "n": 2,
+          "text": "The dashboard rate may not match the network's count: it may use different months, and in network totals Stripe can include disputes its dashboard rate leaves out.",
+          "type": "provider",
+          "ref": "src/content/guides/chargeback-ratio.mdx:186-188"
+        },
+        {
+          "n": 3,
+          "text": "Ask the provider for the ratio, the calculation behind it, the remediation and evidence it wants, and its deadline.",
+          "type": "site-advice",
+          "ref": "src/content/guides/chargeback-ratio.mdx:248-256"
+        }
+      ],
+      "wrong_if": [
+        "Says 0.4% is safe or that Stripe only acts above 1%.",
+        "Names a Stripe ratio cutoff."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx"
+      ]
+    },
+    {
+      "id": "S2",
+      "group": "scenario",
+      "scope": "core",
+      "question": "My provider says my ratio is 1.6%. Does that mean I am in Visa's excessive merchant programme? We sell online in the EU, about 800 card sales a month.",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "No, not on the ratio alone: Visa's merchant test needs at least 150 bps AND at least 1,500 fraud reports and disputes a month (EU, from 1 April 2026).",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:91; src/content/guides/chargeback-ratio.mdx:123-127; src/content/guides/payout-holds.mdx:394"
+        },
+        {
+          "n": 2,
+          "text": "At about 800 sales a month the shop cannot reach 1,500 events, so the merchant test count is not met.",
+          "type": "arithmetic",
+          "ref": "src/content/guides/chargeback-ratio.mdx:91"
+        },
+        {
+          "n": 3,
+          "text": "The merchant test also applies only while the acquirer is below both Visa acquirer levels (Above Standard from 50 bps, Excessive from 70 bps, each with its own 1,500-event portfolio minimum).",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:95-99"
+        },
+        {
+          "n": 4,
+          "text": "Ask the provider which test it applied and how its ratio was counted.",
+          "type": "site-advice",
+          "ref": "src/content/guides/chargeback-ratio.mdx:103; src/content/guides/chargeback-ratio.mdx:108"
+        }
+      ],
+      "wrong_if": [
+        "Says anyone over 1.5% is excessive.",
+        "Says the 1,500 minimum is a ratio or applies per chargeback only.",
+        "States the pre-April-2026 Visa figures."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx"
+      ]
+    },
+    {
+      "id": "S3",
+      "group": "scenario",
+      "scope": "core",
+      "question": "My provider is closing my account over chargebacks. Will I be put on MATCH, and can another provider take me afterwards?",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "MATCH code 04 is met when the previous 3 months' Mastercard chargebacks exceed 1.5% of one month's Mastercard sales transactions AND total at least USD 5,000.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:105-106; src/content/guides/chargeback-ratio.mdx:147-149"
+        },
+        {
+          "n": 2,
+          "text": "When the account ends, the acquirer must report the merchant to MATCH if it has reason to believe the merchant qualifies; it files within 5 calendar days of its termination decision, the merchant's notice or learning the merchant qualifies, whichever is first.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:107; src/content/guides/chargeback-ratio.mdx:150"
+        },
+        {
+          "n": 3,
+          "text": "A MATCH listing does not automatically shut a merchant out: Mastercard allows an acquirer to accept a listed merchant, but each acquirer decides, and the old provider's closure stands.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:57-62; src/content/guides/high-risk-merchant-account.mdx:231"
+        },
+        {
+          "n": 4,
+          "text": "Ask the provider which month's sales transactions it compared against.",
+          "type": "site-advice",
+          "ref": "src/content/guides/chargeback-ratio.mdx:108"
+        }
+      ],
+      "wrong_if": [
+        "Says MATCH needs more than 1% or any chargebacks.",
+        "Says a MATCH listing bars the merchant from all providers for good.",
+        "Says the report is filed within 5 business days."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx"
+      ]
+    },
+    {
+      "id": "S4",
+      "group": "scenario",
+      "scope": "core",
+      "question": "We were flagged for Mastercard's excessive chargeback programme. How many good months until we are out of it?",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "Three consecutive months below the thresholds, according to TabaPay; only then does Mastercard remove a merchant from the programme.",
+          "type": "provider",
+          "ref": "src/content/guides/chargeback-ratio.mdx:70-75"
+        },
+        {
+          "n": 2,
+          "text": "The provider still decides for itself about restrictions and about reopening a closed account.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:74-75"
+        }
+      ],
+      "wrong_if": [
+        "Says one good month is enough.",
+        "Says the provider must lift its restrictions when Mastercard removes the merchant."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx"
+      ]
+    },
+    {
+      "id": "S5",
+      "group": "scenario",
+      "scope": "core",
+      "question": "Braintree charged me a Visa monitoring fee I did not expect. How do I check it, and what are the fee amounts?",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "Ask the provider for an itemised calculation: the programme and level, the data month, merchant ID and region, the chargeback or fraud/dispute count and transaction count, the acquirer's VAMP level, events billed, fee per event, and the clause that lets it pass the fee on.",
+          "type": "site-advice",
+          "ref": "src/content/guides/chargeback-ratio.mdx:201-214"
+        },
+        {
+          "n": 2,
+          "text": "Braintree's VAMP fees are USD 4 per count at Above Standard from 1 January 2026 and USD 8 at Excessive from 1 October 2025.",
+          "type": "provider",
+          "ref": "src/content/guides/chargeback-ratio.mdx:216"
+        },
+        {
+          "n": 3,
+          "text": "A ratio is a share of events while the fees are charged per count, so the count matters as well as the percentage.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:217"
+        }
+      ],
+      "wrong_if": [
+        "Quotes a USD 10 fee per dispute.",
+        "Says the fee depends on a 0.9% ratio.",
+        "Says all card networks charge the same fee."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx"
+      ]
+    },
+    {
+      "id": "S6",
+      "group": "scenario",
+      "scope": "core",
+      "question": "A customer told their bank a payment was fraud, and I refunded them before any dispute was filed. Does that stay out of my Visa ratio?",
+      "key_points": [
+        {
+          "n": 1,
+          "text": "Not necessarily: a fraud report (TC40, a card issuer's flag on a suspected fraudulent payment) counts in the VAMP ratio even when no dispute follows, unless it qualifies for Visa's Compelling Evidence 3.0 exclusion.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:197-199"
+        },
+        {
+          "n": 2,
+          "text": "Only disputes settled through Rapid Dispute Resolution (RDR) stay out of the VAMP ratio, depending on when the data is pulled; ask the provider whether it offers RDR.",
+          "type": "scheme",
+          "ref": "src/content/guides/chargeback-ratio.mdx:194-195"
+        },
+        {
+          "n": 3,
+          "text": "Stripe and Shopify show the fraud report as an early fraud warning.",
+          "type": "provider",
+          "ref": "src/content/guides/chargeback-ratio.mdx:198"
+        }
+      ],
+      "wrong_if": [
+        "Says a refund before the dispute keeps the payment out of the ratio.",
+        "Says a TC40 only counts once it becomes a chargeback."
+      ],
+      "key_source": [
+        "src/content/guides/chargeback-ratio.mdx"
+      ]
+    }
+  ]
+}

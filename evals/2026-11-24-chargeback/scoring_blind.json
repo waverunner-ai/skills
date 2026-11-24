@@ -1,0 +1,526 @@
+{
+ "R01": {
+  "points": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "wrong": 1,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 1,
+  "note": "Says 'within 5 days' not calendar; adds 5-year listing, Visa reporting, listed-reasons claims; says 'probably listed'; omits 1.5%/USD 5,000 test, 'ask which month' point.",
+  "cost": 0.0427356
+ },
+ "R02": {
+  "points": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 1,
+  "note": "Opens with a settled 'You're not in Mastercard's excessive tier'. Also adds the denominator rule (this month's chargebacks over last month's transactions), which is on the site.",
+  "cost": 0.013502800000000002
+ },
+ "R03": {
+  "points": [
+   1,
+   0,
+   0
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Adds Ethoca alerts, CDRN and a rule that disputes count by the date opened or filed; none are in the key or the guide. RDR coverage is vague.",
+  "cost": 0.0486296
+ },
+ "R04": {
+  "points": [
+   0,
+   1,
+   0,
+   1
+  ],
+  "wrong": 1,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 1,
+  "note": "Gives 2.2% as the ratio threshold (pre-April figure, hedged from memory); no acquirer levels; says 'almost certainly not' in programme; 3-D Secure claim not in guide.",
+  "cost": 0.0527816
+ },
+ "R05": {
+  "points": [
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Adds USD 8 Excessive fee, 70 bps, 1,500 events, 150 bps merchant test and RDR beyond the key; all appear in the site guide.",
+  "cost": 0.047867599999999996
+ },
+ "R06": {
+  "points": [
+   1,
+   1,
+   0
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Adds the ECP name and a separate EFM fraud program, neither in the guide. Never says the thresholds come from TabaPay; its caveat covers only fees and exit terms.",
+  "cost": 0.0476136
+ },
+ "R07": {
+  "points": [
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Claims 1.5% is 'above the thresholds that card networks commonly monitor' - Visa/Mastercard thresholds also need count minimums, and 1.5% is at, not above, ECM level; the guide has no such statement.",
+  "cost": 0.0398836
+ },
+ "R08": {
+  "points": [
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Adds Mastercard ECM/HECM and Visa VAMP thresholds and acquirer levels not in the key points; all appear in the site guide.",
+  "cost": 0.048797600000000003
+ },
+ "R09": {
+  "points": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Adds Mastercard ECM, MATCH code 04, CEMEA Visa test and Shopify points beyond the key; all appear in the site guide.",
+  "cost": 0.0502676
+ },
+ "R10": {
+  "points": [
+   0,
+   1,
+   0
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Gives vague '$4 to $10' range without confirming $4 at Above Standard; adds TC15, CDRN, Order Insight, waiver and threshold-count claims absent from guide; omits 50 bps fine.",
+  "cost": 0.0427496
+ },
+ "R11": {
+  "points": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Added the rule that a won dispute still counts in monitoring totals, which is not in the key points but is in the site guide.",
+  "cost": 0.045779600000000004
+ },
+ "R12": {
+  "points": [
+   1,
+   1,
+   0
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 1,
+  "note": "Says 'almost certainly not' in the programme and 'shouldn't be flagged'. Adds a 2.2% 2025 merchant threshold and VDMP/VFMP history, neither in the guide. Omits that the merchant test depends on the acquirer's level.",
+  "cost": 0.0502876
+ },
+ "R13": {
+  "points": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Adds ECM, HECM, VAMP, MATCH thresholds and Braintree fees beyond the key points, but all appear in the site guide.",
+  "cost": 0.04898159999999999
+ },
+ "R14": {
+  "points": [
+   1,
+   1,
+   0
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Adds Order Insight, Verifi pre-dispute tools, TC15 and VDMP/VFMP replacement, none in key or guide; omits CE 3.0 exclusion and early fraud warning.",
+  "cost": 0.0494056
+ },
+ "R15": {
+  "points": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Adds ECM/HECM, VAMP, MATCH thresholds and acquirer levels beyond key points, but all appear in the site guide.",
+  "cost": 0.0436596
+ },
+ "R16": {
+  "points": [
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Adds Visa merchant thresholds (150 bps, 1,500 events), CEMEA test and acquirer-level condition beyond the key points, but all appear in the site guide.",
+  "cost": 0.0472896
+ },
+ "R17": {
+  "points": [
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Adds ECM, HECM, VAMP and MATCH thresholds that are not in the key points, but all appear in the site guide. Status is left to the provider.",
+  "cost": 0.0483376
+ },
+ "R18": {
+  "points": [
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 1,
+  "note": "Says 'probably fine'; adds unsourced thresholds (0.9% network start, 0.75-1% processor limits), names Adyen and Square, and claims Visa uses same-month transactions.",
+  "cost": 0.0492156
+ },
+ "R19": {
+  "points": [
+   1,
+   1,
+   0
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Added underwriting, delivery-risk and refund triggers plus a different-denominator claim, none in key or guide; omits asking Stripe for the ratio calculation.",
+  "cost": 0.0417856
+ },
+ "R20": {
+  "points": [
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Adds a five-year listing duration and removal-before-five-years rules, neither in the key nor in the site guide.",
+  "cost": 0.0446836
+ },
+ "R21": {
+  "points": [
+   1,
+   1,
+   1,
+   0
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Added the Visa 2.2% to 1.5% change and the old VDMP/VFMP programmes, Ethoca and CDRN, none of which are in the guide. Omits the dashboard-months check.",
+  "cost": 0.0503856
+ },
+ "R22": {
+  "points": [
+   1,
+   0
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Added a 120-day dispute window and a roughly 6-month risk review or termination point, neither in the guide. Does not clearly say the provider decides restrictions and reopening separately.",
+  "cost": 0.0475876
+ },
+ "R23": {
+  "points": [
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Mentions 'script doesn't compute' and the 'read on 4 November 2026' dating; also Braintree per-count fees are in guide. Acquirer 1,500 minimum is in guide. Unsupported: 'script' reference, otherwise mostly supported.",
+  "cost": 0.0436796
+ },
+ "R24": {
+  "points": [
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Added the 50 bps merchant-ratio condition for Braintree fees, TC40/CE3.0/RDR details and a 10-events example; all appear in the site guide.",
+  "cost": 0.0430416
+ },
+ "R25": {
+  "points": [
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Adds Mastercard ECM threshold (150 bps, 100 chargebacks) and the prior-month transaction method, which are not key points but are both in the site guide.",
+  "cost": 0.0447836
+ },
+ "R26": {
+  "points": [
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Added MATCH, VAMP, assessments from month 2/3, three-month exit rule, and Mastercard ratio method; all appear in SITE_GUIDE.",
+  "cost": 0.0428956
+ },
+ "R27": {
+  "points": [
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Adds ECM/HECM ratio and count thresholds, remediation and assessment timing, and MATCH, none in key points; all appear in the site guide.",
+  "cost": 0.0463036
+ },
+ "R28": {
+  "points": [
+   1,
+   1,
+   1,
+   0
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Added rule that Mastercard counts chargebacks by processing month, not transaction date; not in the key or guide. Omits the Visa VAMP point.",
+  "cost": 0.047679599999999996
+ },
+ "R29": {
+  "points": [
+   0,
+   0,
+   0
+  ],
+  "wrong": 1,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Gives a $5-$10 per-event fee range, contradicting Braintree's USD 4 and USD 8 fees; the range is not in the guide. Also states a 2.2% threshold for 2025.",
+  "cost": 0.0471816
+ },
+ "R30": {
+  "points": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Added Visa VAMP and MATCH code 04 thresholds and won-dispute rule beyond the key points; all appear in the site guide.",
+  "cost": 0.048427599999999994
+ },
+ "R31": {
+  "points": [
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Adds a lawyer recommendation and says guide doesn't state which month's sales; mostly guide-backed. Lawyer advice is unsupported by guide; 'neither can any tool I have' is hedge.",
+  "cost": 0.0051369
+ },
+ "R32": {
+  "points": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Adds MATCH, Visa VAMP thresholds, CEMEA figures, ECM assessments from month 2, and 3-month exit rule; all appear in the site guide.",
+  "cost": 0.0435416
+ },
+ "R33": {
+  "points": [
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Added MATCH, VAMP and three-month exit rule, all in site guide; no safe/in-programme claim, status left to provider.",
+  "cost": 0.0432756
+ },
+ "R34": {
+  "points": [
+   0,
+   1
+  ],
+  "wrong": 1,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Says Visa/most processors use current month's transactions and gives example ratios as usable; adds unsupported 0.9% threshold and 'often 100 or more'; never says ratio is 'not available'.",
+  "cost": 0.040709600000000006
+ },
+ "R35": {
+  "points": [
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Adds HECM 300 bps/300, Visa VAMP 150 bps/1,500 and MATCH 1.5%/USD 5,000 thresholds not in the key; all appear in the site guide.",
+  "cost": 0.047197600000000006
+ },
+ "R36": {
+  "points": [
+   1,
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Added HECM, Visa VAMP, CEMEA and MATCH thresholds beyond key; all are in the site guide. Does not declare safe.",
+  "cost": 0.0048935
+ },
+ "R37": {
+  "points": [
+   1,
+   0,
+   0
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 1,
+  "note": "Headline says 'you're in HECM tier'. Adds Ethoca, Consumer Clarity, Order Insight, reason codes, reserves and a 100-299 ECM band, none of which are in the guide.",
+  "cost": 0.0494676
+ },
+ "R38": {
+  "points": [
+   1,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Added fee example ($1,000 sale = $15) and a $0.10 fixed per-transaction fee; these figures are not in the key or the site guide.",
+  "cost": 0.0394276
+ },
+ "R39": {
+  "points": [
+   1,
+   0,
+   0,
+   1
+  ],
+  "wrong": 0,
+  "invented": 1,
+  "unsupported": 1,
+  "verdict": 0,
+  "note": "Invented 0.5-0.75% review starts, 2.2% Visa merchant figure, 0.9% VDMP, 3% tier, 'aim under 0.5%'. Count mentioned only loosely; no Shopify pre-threshold action stated.",
+  "cost": 0.0420296
+ },
+ "R40": {
+  "points": [
+   0,
+   0
+  ],
+  "wrong": 1,
+  "invented": 0,
+  "unsupported": 0,
+  "verdict": 0,
+  "note": "Headline answer divides by November's 3,000 (1.5%). The 1.8% figure is only an alternative, and the 100-chargeback ECM minimum is never mentioned.",
+  "cost": 0.0449216
+ }
+}
